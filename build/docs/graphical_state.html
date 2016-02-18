@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>graphical_state.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>graphical_state.js</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="control_panel.html">
+                    control_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_measure.html">
+                    graphical_measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_note.html">
+                    graphical_note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_object.html">
+                    graphical_object.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_state.html">
+                    graphical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_stave.html">
+                    graphical_stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="live_score.html">
+                    live_score.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="measure.html">
+                    measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="midi_player.html">
+                    midi_player.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="music_constants.html">
+                    music_constants.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="musical_state.html">
+                    musical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note.html">
+                    note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note_popup.html">
+                    note_popup.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="playback_panel.html">
+                    playback_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="renderer.html">
+                    renderer.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_editor.html">
+                    score_editor.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_panel.html">
+                    score_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="stave.html">
+                    stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="structs.html">
+                    structs.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="ui.html">
+                    ui.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="voice.html">
+                    voice.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="z.html">
+                    z.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre>live_score = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./live_score.js"</span>);
+live_score.Graphical_stave = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./graphical_stave.js"</span>);
+live_score.structs = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./structs.js"</span>);
+
+<span class="hljs-comment">/**
+* Graphical_state
+*   Constructor for the Graphical_state object, which contains all the
+*   positional information about the musical information in the score.
+*   It is responsible for scraping positional information from Vexflow
+*   and for figuring out which elements are being acted on by the user
+*   through translating Ui events into a format which can be
+*   understood by the Musical_state object
+* args
+*   none
+* returns
+*   none
+*/</span>
+live_score.Graphical_state = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+  <span class="hljs-comment">/**
+  * x,y information about the position of staves on the canvas, utilizes the
+  * Graphical_object object
+  */</span>
+  <span class="hljs-keyword">this</span>.staves = [];
+
+};
+
+<span class="hljs-comment">/**
+* clear_state
+*   each time the score changes, the positional information changes as
+*   well. The old information needs to be cleared each time the new
+*   positional information is read
+* args
+*   none
+* returns
+*   none
+*/</span>
+live_score.Graphical_state.prototype.clear_state = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">this</span>.staves = [];
+};
+
+<span class="hljs-comment">/**
+* update
+*   scrapes the information from the Vexflow score created by the renderer
+*   updates the positional information of the staves, measures and notes.
+* args
+*   renderer
+* returns
+*   none
+*/</span>
+live_score.Graphical_state.prototype.update = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">renderer</span>)</span>{
+   
+  <span class="hljs-keyword">this</span>.clear_state();
+  
+  <span class="hljs-keyword">var</span> staves = renderer.get_staves();
+  <span class="hljs-keyword">var</span> voice_list = renderer.get_voices();
+
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; voice_list.length; i++){
+    <span class="hljs-keyword">var</span> stave_contents = [];
+    <span class="hljs-keyword">var</span> voice = voice_list[i];
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> j = <span class="hljs-number">0</span>; j &lt; voice.length; j++){
+      <span class="hljs-keyword">var</span> voice_contents = voice[j].tickables;
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> k = <span class="hljs-number">0</span>; k &lt; voice_contents.length; k++){
+        voice_contents[k].stave = staves[i];
+        stave_contents.push(voice_contents[k]);
+      }
+    }
+    <span class="hljs-keyword">var</span> graphical_stave = <span class="hljs-keyword">new</span> live_score.Graphical_stave();
+    graphical_stave.extract_positional_info(staves[i], stave_contents);
+    <span class="hljs-keyword">this</span>.staves.push(graphical_stave);
+  }
+}; 
+
+<span class="hljs-comment">/**
+* get_note_info
+*   queries the graphical_state to either determine the position of click
+*   within the score, or determine whether a note had been clicked on
+* args
+*   graphical_object
+*     a Graphical_object (See graphical_object.js) containing the coordinates
+*     being looked up
+*   is_new_note
+*     a boolean denoting whether an existing note is being looked up, or a new
+*     note is being added
+* returns
+*   note_info
+*     information about the note that was looked up
+*/</span>
+live_score.Graphical_state.prototype.get_note_info = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">graphical_object,
+  is_new_note</span>)</span>{
+  
+  <span class="hljs-keyword">var</span> note_info = live_score.structs.create_note_info();
+  <span class="hljs-keyword">var</span> stave_found = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.staves.length &amp;&amp; !stave_found; i++){
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.staves[i].contains(graphical_object)){
+      note_info.stave_num = i;
+      stave_found = <span class="hljs-literal">true</span>;
+      <span class="hljs-keyword">this</span>.staves[i].get_note_info(graphical_object,note_info,is_new_note);
+    }
+  }
+  note_info.stave_found = stave_found;
+  note_info.valid_input = note_info.stave_found &amp;&amp; note_info.measure_found;
+  
+  <span class="hljs-keyword">return</span> note_info;
+};
+
+<span class="hljs-comment">/**
+* get_new_note_position
+*   determines the stave, measure, and x,y positioning of a new note
+*   being inserted into the score
+* args
+*   event_info
+*     a struct, described in structs.js, containing information about the
+*     ui event
+* returns
+*   note_info
+*     a struct, described in structs.js, containing information about the
+*     where the new note will be inserted into the score
+*/</span>
+live_score.Graphical_state.prototype.get_new_note_position = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+  event_info</span>)</span>{
+  
+  <span class="hljs-keyword">var</span> is_new_note = <span class="hljs-literal">true</span>;
+  <span class="hljs-keyword">var</span> note_info = <span class="hljs-keyword">this</span>.get_note_info(event_info.graphical_object, is_new_note);
+  note_info.note_length = event_info.note_length;
+  note_info.quantization = event_info.quantization;
+
+  <span class="hljs-keyword">return</span> note_info;
+};
+
+<span class="hljs-comment">/**
+* get_note_position
+*   determines if a position clicked in the score is a note
+* args
+*   event_info
+*     a struct (see structs.js) containing information about the
+*     ui event
+* returns
+*   note_info
+*     a struct (see structs.js) containing information about whether the
+*     position clicked contained a note
+*/</span>
+live_score.Graphical_state.prototype.get_note_position = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+  event_info</span>)</span>{
+ 
+  <span class="hljs-keyword">var</span> is_new_note = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">var</span> note_info = <span class="hljs-keyword">this</span>.get_note_info(event_info.graphical_object, is_new_note);
+  <span class="hljs-keyword">return</span> note_info;
+};
+
+<span class="hljs-built_in">module</span>.exports = live_score.Graphical_state;</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

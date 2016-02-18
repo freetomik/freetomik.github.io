@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>graphical_object.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>graphical_object.js</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="control_panel.html">
+                    control_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_measure.html">
+                    graphical_measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_note.html">
+                    graphical_note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_object.html">
+                    graphical_object.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_state.html">
+                    graphical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_stave.html">
+                    graphical_stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="live_score.html">
+                    live_score.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="measure.html">
+                    measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="midi_player.html">
+                    midi_player.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="music_constants.html">
+                    music_constants.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="musical_state.html">
+                    musical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note.html">
+                    note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note_popup.html">
+                    note_popup.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="playback_panel.html">
+                    playback_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="renderer.html">
+                    renderer.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_editor.html">
+                    score_editor.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_panel.html">
+                    score_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="stave.html">
+                    stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="structs.html">
+                    structs.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="ui.html">
+                    ui.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="voice.html">
+                    voice.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="z.html">
+                    z.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre>live_score = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./live_score.js"</span>);
+
+<span class="hljs-comment">/**
+* Graphical_object
+*   Constructor for the Graphical_object object. This object is used to denote
+*   the coordinates on the canvas that contain a particular object on the score.
+* args
+*   start_x
+*     the farthest left x position on the canvas of a given graphic
+*   end_x
+*     the farthest right x position on the canvas of a given graphic
+*   start_y
+*     the topmost y position on the canvas of a given graphic
+*   end_y
+*     the bottom-most y position on the canvas of a given graphic
+* returns
+*   none
+*/</span>
+live_score.Graphical_object = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">start_x,end_x,start_y,end_y</span>)</span>{
+  <span class="hljs-keyword">this</span>.start_x = start_x;
+  <span class="hljs-keyword">this</span>.end_x = end_x;
+  <span class="hljs-keyword">this</span>.start_y = start_y;
+  <span class="hljs-keyword">this</span>.end_y = end_y;
+};
+
+<span class="hljs-comment">/**
+* intersects_area
+*   determines if another graphical_object intersects with this 
+*   graphical_object
+* args
+*   graphical_object
+*     the area being checked against the area of this graphical_object
+* returns
+*   intersects
+*     either true or false, whehter the two areas overlap
+*/</span>
+live_score.Graphical_object.prototype.intersects_area = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+  graphical_object</span>)</span>{
+  
+  <span class="hljs-keyword">var</span> intersects = <span class="hljs-literal">false</span>;
+  intersects = intersects || <span class="hljs-keyword">this</span>.contains_point(graphical_object.start_x,
+                                                 graphical_object.start_y);
+  intersects = intersects || <span class="hljs-keyword">this</span>.contains_point(graphical_object.end_x,
+                                                 graphical_object.start_y);
+  intersects = intersects || <span class="hljs-keyword">this</span>.contains_point(graphical_object.start_x,
+                                                 graphical_object.end_y);
+  intersects = intersects || <span class="hljs-keyword">this</span>.contains_point(graphical_object.end_x,
+                                                 graphical_object.end_y);
+  <span class="hljs-keyword">return</span> intersects;
+};
+
+<span class="hljs-comment">/**
+* contains point
+*   determines if this graphical_object contains a given x,y coordinate
+* args
+*   x
+*     the point's x coordinate
+*   y
+*     the point's y coordinate
+* returns
+*   contains
+*     either true or false, whehter this graphical_object contains the point
+*/</span>
+live_score.Graphical_object.prototype.contains_point = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x,y</span>)</span>{
+  <span class="hljs-keyword">var</span> contains = <span class="hljs-literal">true</span>;
+  contains = contains &amp;&amp; (<span class="hljs-keyword">this</span>.start_x &lt; x);
+  contains = contains &amp;&amp; (<span class="hljs-keyword">this</span>.end_x &gt; x);
+  contains = contains &amp;&amp; (<span class="hljs-keyword">this</span>.start_y &lt; y);
+  contains = contains &amp;&amp; (<span class="hljs-keyword">this</span>.end_y &gt; y);
+  <span class="hljs-keyword">return</span> contains;
+};
+
+<span class="hljs-comment">/**
+* before_area
+*   determines if this graphical_object starts before a given area
+* args
+*   graphical_object
+*     the area being compared to this area
+* returns
+*   a boolean denoting whether this object occurs before the object passed in
+*/</span>
+live_score.Graphical_object.prototype.before_area = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">graphical_object</span>)</span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.before_point(graphical_object.start_x);
+};
+
+<span class="hljs-comment">/**
+* before_point
+*   determines if this graphical_object starts before a given area
+* args
+*   x
+*     the point's x coordinate
+* returns
+*   before
+*     either true or false, whehter this graphical_object is before the point
+*/</span>
+live_score.Graphical_object.prototype.before_point = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">x</span>)</span>{
+  <span class="hljs-keyword">var</span> before = <span class="hljs-literal">true</span>;
+  before = before &amp;&amp; (<span class="hljs-keyword">this</span>.start_x &lt; x);
+  <span class="hljs-keyword">return</span> before;
+};
+
+<span class="hljs-built_in">module</span>.exports = live_score.Graphical_object;</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

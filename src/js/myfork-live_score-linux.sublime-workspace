@@ -1,0 +1,687 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"D",
+				"DumpNodes"
+			],
+			[
+				"Du",
+				"DumpNode"
+			],
+			[
+				"dumpno",
+				"DumpNodes"
+			],
+			[
+				"I",
+				"Internet"
+			],
+			[
+				"fi",
+				"first_empty_melody"
+			],
+			[
+				"mel",
+				"melody1"
+			],
+			[
+				"wri",
+				"writeRecordFooter"
+			],
+			[
+				"key",
+				"keyPressTime"
+			],
+			[
+				"font",
+				"font-style"
+			],
+			[
+				"fo",
+				"font-family"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"pa",
+				"padding-top"
+			],
+			[
+				"na",
+				"nazvy_sloupcu"
+			],
+			[
+				"ar",
+				"array"
+			],
+			[
+				"nadpis_",
+				"nadpis_vysledku"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"liss",
+				"list-style-type"
+			],
+			[
+				"hra",
+				"Hraje_v"
+			],
+			[
+				"VAR",
+				"VARCHAR2"
+			],
+			[
+				"k",
+				"klavesnice"
+			],
+			[
+				"sf",
+				"sfetch1"
+			],
+			[
+				"data",
+				"DATA_EN"
+			],
+			[
+				"code",
+				"CODE_EN"
+			],
+			[
+				"re",
+				"RESET"
+			],
+			[
+				"led",
+				"LED"
+			],
+			[
+				"dec",
+				"DEC"
+			],
+			[
+				"cou",
+				"COUNT"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/home/tomik/school_projects/myforks/live_score/src/html/index.html",
+			"settings":
+			{
+				"buffer_size": 1840,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "midi_player.js",
+			"settings":
+			{
+				"buffer_size": 4742,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "playback_panel.js",
+			"settings":
+			{
+				"buffer_size": 1134,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 390.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Discover Packages"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			],
+			[
+				"pack i",
+				"Package Control: Install Package"
+			],
+			[
+				":lis",
+				"Set Syntax: Lisp"
+			],
+			[
+				":m",
+				"Set Syntax: MATLAB"
+			],
+			[
+				":matl",
+				"Set Syntax: MATLAB"
+			],
+			[
+				":mat",
+				"Set Syntax: MATLAB"
+			],
+			[
+				":hel",
+				"Snippet: vhdl template"
+			],
+			[
+				"Snippet: ",
+				"Snippet: struct"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 328.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": false,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/tomik/school_projects/myforks/live_score/src/js/export.js",
+		"/media/tomik/DATA/bp todo.txt",
+		"/home/tomik/.config/sublime-text-2/Packages/User/SFTP.errors.log",
+		"/E/school/BP/TODO.txt",
+		"/E/school/BP/text/music-dict.txt",
+		"/E/school/BP/MusicXML/xmlsamples/ActorPreludeSample.xml",
+		"/E/school/BP/text/readme.txt",
+		"/C/Users/Tomáš/Downloads/archivy/Circuit Simulators/Atanua/atanua-master/src/8051/emu8051.h",
+		"/media/tomik/DATA/school/BP/konzultace/otazky.txt",
+		"/home/tomik/school_projects/vexflow-musicxml/demo/index.html",
+		"/home/tomik/school_projects/vexflow-musicxml/demo/beethoven_moonlight_m1.xml",
+		"/home/tomik/school_projects/vexflow-musicxml/demo/Chant.xml",
+		"/home/tomik/school_projects/vexflow-musicxml/demo/BrahWiMeSample.xml",
+		"/media/tomik/DATA/school/BP/web/js/printxml.js",
+		"/media/tomik/DATA/school/BP/web/js/myscript.js",
+		"/media/tomik/DATA/school/BP/web/js/vexflow-debug.js",
+		"/home/tomik/school_projects/vexflow-musicxml/vexflow.musicxml.js",
+		"/home/tomik/school_projects/vexflow-musicxml/demo/document_tests.js",
+		"/E/school/BP/konzultace/otazky.txt",
+		"/C/Users/Tomáš/Documents/tablet fix/GoClever R75/Drivers/android_winusb.inf",
+		"/C/Users/Tomáš/Documents/tablet fix/GoClever R75/Drivers/amd64/NOTICE",
+		"/C/Users/Tomáš/Documents/tablet fix/GoClever R75/Drivers/i386/NOTICE",
+		"/C/Users/Tomáš/Documents/textové/kbang-rene_win_in_5.xml",
+		"/E/school/BP/web/myscript.js",
+		"/E/school/BP/web/js/vexflow-musicxml-debug.js",
+		"/E/school/BP/web/js/vexflow-debug.js",
+		"/E/school/BP/web/vexflow-musicxml-debug.js",
+		"/E/school/BP/web/example.xml",
+		"/E/school/BP/MusicXML/xmlsamples/Chant.xml",
+		"/E/school/BP/MusicXML/xmlsamples/ParsedActor-min.xml",
+		"/E/school/BP/MusicXML/xmlsamples/ParsedActor.xml",
+		"/E/school/BP/MusicXML/xmlsamples/Actor-min.xml",
+		"/E/school/BP/MusicXML/xmlsamples/ParsedChant.xml",
+		"/E/school/BP/MusicXML/xmlsamples/ParsedChant-min.xml",
+		"/E/school/BP/MusicXML/xmlsamples/Chant-min.xml",
+		"/E/school/BP/MusicXML/xmlsamples/MozaVeilSample.xml",
+		"/C/Users/Tomáš/Desktop/jsonexercise.json",
+		"/C/Users/Tomáš/Desktop/xmlexercise.xml",
+		"/E/school/BP/web/musicxml_editor.sublime-workspace",
+		"/E/school/a5sem/ISA/projekt/odevzdat/isaproj/odevzdani/sipscan.py",
+		"/E/school/BP/web/sftp-config.json",
+		"/E/school/BP/scorediv/scorediv-latest.js",
+		"/E/school/myprojects/learning_cpp/first_solution/first/first.cpp",
+		"/E/Videos/Lie to Me/season 2/titulky cz/cast 10.srt",
+		"/C/Users/Tomáš/AppData/Local/Temp/FreeCommander3152/02/C02/Fillvector.cpp",
+		"/C/Users/Tomáš/Desktop/example.html",
+		"/E/school/myprojects/melobeep/.gitignore",
+		"/C/Users/Tomáš/Desktop/melobeep/stufffrommelobeep/melobeep things/doplnovac.cpp",
+		"/E/school/a3sem/IFJ/ast_tree.c",
+		"/C/Users/Tomáš/Desktop/todo.7sn",
+		"/C/Users/Tomáš/Desktop/melobeep/MelobeepLinux/mario.txt",
+		"/C/Users/Tomáš/Desktop/melobeep/MelobeepLinux/dokonano jest.txt",
+		"/C/Users/Tomáš/Desktop/melobeep/stufffrommelobeep/melobeep songs/ty prowadziszC.txt",
+		"/C/Users/Tomáš/Desktop/melobeep/MelobeepLinux/dlouhy.txt",
+		"/C/Users/Tomáš/Desktop/melobeep/MelobeepLinux/MeloBeepLinux.c",
+		"/C/Users/Tomáš/Desktop/melobeep/MeloBeepLinux.c",
+		"/C/Users/Tomáš/Desktop/melobeep/stufffrommelobeep/melobeep songs/dokonano jest.txt",
+		"/E/school/6sem/IPP2/Lambda kalkul/lambda_example.lisp",
+		"/E/school/6sem/IKR/semestralka/termin1.txt",
+		"/C/Users/Tomáš/Desktop/melobeep/Melobeep windows/melobeep songs/Buh silny.txt",
+		"/C/Users/Tomáš/Desktop/melobeep/stufffrommelobeep/melobeep songs/dej nam pane silu.txt",
+		"/C/Users/Tomáš/AppData/Roaming/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Tomáš/Documents/textové/important thoughts.txt",
+		"/C/Users/Tomáš/Desktop/10moperr.txt",
+		"/C/Users/Tomáš/Documents/textové/important thoughtsUTF8",
+		"/E/school/a5sem/IMP/projekt/pseudocode.c",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/popis_jazyka_a_programy/popis.txt",
+		"/C/Users/Tomáš/Desktop/zkoušky.txt",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/scaner.c",
+		"/E/school/a5sem/IMP/projekt/main.c",
+		"/E/school/a4sem/IZU/lisp/funkce.lsp",
+		"/C/Users/Tomáš/Documents/lambda_priklad.xml",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/main.c",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/popis_jazyka_a_programy/nasobeni.src",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/popis_jazyka_a_programy/fibonacci.src",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/parser.c",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/stable.c",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/stable.h",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/str.c",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/str.h",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/ilist.h",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/ilist.c",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/scaner.h",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/interpret.c",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/parser.h",
+		"/E/school/a3sem/IFJ/jednoduchy_interpret/zdrojove_soubory/interpret.h",
+		"/E/school/a4sem/IZU/prolog/einstein - complex.pl",
+		"/E/school/a4sem/IZU/prolog/einstein.pl",
+		"/C/Users/Tomáš/AppData/Roaming/Sublime Text 2/Packages/Emmet/Emmet.sublime-settings",
+		"/C/Users/Tomáš/AppData/Roaming/Sublime Text 2/Packages/User/Plain text.sublime-settings",
+		"/C/Users/Tomáš/AppData/Roaming/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/C/Users/Tomáš/Desktop/misc/dfvpl4fy.default/webappsstore.sqlite",
+		"/E/school/6sem/IKR/projekt/osnova_prezentace.txt",
+		"/E/school/6sem/IKR/projekt/IKR_projekt15.txt",
+		"/E/school/6sem/IKR/projekt/xkrato35_xhudzi01/SRC/audio_gmm.m",
+		"/E/school/6sem/IKR/projekt/xkrato35_xhudzi01/SRC/image_lda.m",
+		"/C/Users/Tomáš/Desktop/Mafia Main Theme tabs.txt",
+		"/E/school/6sem/IKR/demos/IKR_demos/lib/png2fea.m",
+		"/E/school/6sem/IKR/demos/IKR_demos/lib/wav16khz2mfcc.m",
+		"/E/school/6sem/IKR/demos/IKR_demos/lib/mfcc.m",
+		"/E/school/6sem/IKR/demos/IKR_demos/lib/mel_filter_bank.m",
+		"/E/school/6sem/IKR/projekt/xkrato35_xhudzi01/image_lda.txt",
+		"/E/school/6sem/IKR/projekt/xkrato35_xhudzi01/audio_gmm.txt",
+		"/E/school/6sem/IKR/projekt/xkrato35_xhudzi01/srovnani.txt",
+		"/E/school/6sem/IKR/projekt/xkrato35_xhudzi01/shody.txt",
+		"/C/Users/Tomáš/Desktop/cruz esp.txt",
+		"/E/school/6sem/IKR/projekt/xkrato35_xhudzi01/SRC/README.txt",
+		"/E/school/6sem/ITY/projects/4/proj4.bib",
+		"/E/school/6sem/ITY/projects/5/proj5.toc",
+		"/E/school/6sem/IKR/demos/IKR_demos/demo_gmm.m",
+		"/E/school/6sem/IKR/demos/IKR_demos/demo_perceptron.m",
+		"/E/school/6sem/IKR/demos/IKR_demos/lib/raw8khz2mfcc.m",
+		"/E/school/6sem/IKR/demos/IKR_demos/demo_genderID.m",
+		"/E/school/6sem/ITY/projects/5/proj5.out",
+		"/E/school/6sem/IKR/demos/IKR_demos/lib/train_gauss.m",
+		"/C/Users/Tomáš/AppData/Local/Temp/Temp1_smelt-1.0.zip/smelt-1.0/INSTALL",
+		"/E/school/6sem/ITY/projects/4/csplainnat.bst",
+		"/E/school/6sem/ITY/projects/4/czechiso.bst",
+		"/E/school/6sem/ITY/projects/4/proj4.bbl",
+		"/E/school/6sem/ITY/projects/4/url.sty",
+		"/E/school/6sem/ITY/projects/4/natbib.sty",
+		"/C/Users/Tomáš/AppData/Local/Temp/FreeCommander2552/11/csplainnat/csplainnat.bst",
+		"/C/Users/Tomáš/AppData/Local/Temp/FreeCommander2552/11/csplainnat/Makefile",
+		"/E/school/6sem/ITY/projects/4/proj4.ps",
+		"/E/school/6sem/ITY/projects/3/proj3text.txt",
+		"/E/school/6sem/ITY/projects/3/graphics.sty",
+		"/E/school/6sem/ITY/projects/3/algorithm.sty",
+		"/C/Users/Tomáš/AppData/Local/Temp/scp15624/homes/eva/xh/xhudzi01/1sem/izp/proj2/proj2-doc-latin2/img/makefile"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/media/tomik/DATA/school/BP/web",
+			"/E/school/BP/web",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"play",
+			"Play",
+			"play",
+			"structs",
+			"h1",
+			"4",
+			"xmlinput",
+			"fileInput",
+			"Vex.Flow.Measure.Note",
+			"note",
+			"measure",
+			"canvas",
+			"document",
+			"Document",
+			"document",
+			"Document",
+			"document",
+			"Document",
+			"appearsValid",
+			"Backend.appearsValid",
+			"content",
+			"text",
+			"/js",
+			"\"js",
+			"js",
+			"new",
+			"debouncedResize",
+			"elapsed",
+			"span",
+			"<!--=*-->",
+			"<!--=========================================================-->",
+			"\\n",
+			"<br/>",
+			"BR",
+			", 4",
+			"Lev,",
+			"Lev",
+			"nodeName",
+			"indent(",
+			"ndent(",
+			"Lev",
+			"indent(",
+			"indent",
+			"msg",
+			"indent",
+			"msg=",
+			"msg",
+			"function",
+			"msg",
+			"=",
+			"txt",
+			"menuitem",
+			" <",
+			"<",
+			" <",
+			"partw",
+			"musicCanvas",
+			"a_context",
+			"canvas",
+			"homes",
+			"skl",
+			"sklad",
+			"adresa",
+			"datum_a_cas",
+			"delka",
+			"nazev",
+			"pk",
+			"PK",
+			"pk",
+			"tabulka",
+			"tabulka_upravy",
+			"delka",
+			"nazev",
+			"tones",
+			"\\d\\d\\d",
+			"131",
+			":",
+			".f",
+			"<",
+			"nota",
+			"?[#]",
+			"[t]",
+			"[.]",
+			"=",
+			"[*]?",
+			"|",
+			"regexr",
+			"odmlk",
+			"[*]?",
+			"\\[[^\\]]*\\]",
+			"odmlka",
+			"|",
+			" ",
+			"[t]?[*]",
+			"[t]?[-]",
+			"(1+2+3)",
+			"(1|2|3)",
+			"+",
+			"|",
+			"*",
+			"ly",
+			"li",
+			"x2",
+			"x1",
+			"x0",
+			"λx0",
+			" ",
+			"lambda",
+			"666",
+			"\\d \\d",
+			"4 1",
+			"\"I",
+			"2--2----0--2",
+			"--------------------------",
+			"-------------------------",
+			"------------------------",
+			"-----------------------",
+			"----------------------",
+			"---------------------",
+			"--------------------",
+			"-------------------",
+			"------------------",
+			"-----------------",
+			"----------------",
+			"---------------",
+			"--------------",
+			"8  8",
+			"4  4"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"",
+			"Osoba",
+			"-->",
+			" s",
+			"RESET",
+			"DECOUT",
+			"1",
+			"$1 when",
+			"\"$1\"",
+			"\\\"$1\\\"",
+			"\"$1\"",
+			"\"\\1\"",
+			"\"\"",
+			"\\\"[0|1]{8}\\\"",
+			"\"[0|1]{8}\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/tomik/school_projects/myforks/live_score/src/html/index.html",
+					"settings":
+					{
+						"buffer_size": 1840,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1460,
+								1460
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 415.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "midi_player.js",
+					"settings":
+					{
+						"buffer_size": 4742,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1412,
+								1412
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 738.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "playback_panel.js",
+					"settings":
+					{
+						"buffer_size": 1134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								614,
+								614
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 119.0
+	},
+	"output.sftp":
+	{
+		"height": 30.0
+	},
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"d",
+				"/media/tomik/DATA/school/BP/web/js/drawing.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 279.0,
+	"status_bar_visible": true
+}

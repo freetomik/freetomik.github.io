@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>music_constants.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>music_constants.js</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="control_panel.html">
+                    control_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_measure.html">
+                    graphical_measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_note.html">
+                    graphical_note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_object.html">
+                    graphical_object.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_state.html">
+                    graphical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_stave.html">
+                    graphical_stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="live_score.html">
+                    live_score.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="measure.html">
+                    measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="midi_player.html">
+                    midi_player.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="music_constants.html">
+                    music_constants.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="musical_state.html">
+                    musical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note.html">
+                    note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note_popup.html">
+                    note_popup.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="playback_panel.html">
+                    playback_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="renderer.html">
+                    renderer.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_editor.html">
+                    score_editor.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_panel.html">
+                    score_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="stave.html">
+                    stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="structs.html">
+                    structs.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="ui.html">
+                    ui.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="voice.html">
+                    voice.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="z.html">
+                    z.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre>live_score = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./live_score.js"</span>);
+Vex        = <span class="hljs-built_in">require</span>(<span class="hljs-string">"vexflow"</span>);
+
+<span class="hljs-comment">/**
+* a conversion table between the note length names, and the values used 
+* to represent those note lengths
+*/</span>
+live_score.note_lengths = {
+  <span class="hljs-string">"whole"</span>:<span class="hljs-number">1</span>,
+  <span class="hljs-string">"half"</span>:<span class="hljs-number">2</span>,
+  <span class="hljs-string">"quarter"</span>:<span class="hljs-number">4</span>,
+  <span class="hljs-string">"eighth"</span>:<span class="hljs-number">8</span>,
+  <span class="hljs-string">"sixteenth"</span>:<span class="hljs-number">16</span>,
+  <span class="hljs-string">"thirty_second"</span>:<span class="hljs-number">32</span>
+};
+
+<span class="hljs-comment">/**
+* a lookup table for the highest allowed note for each clef type. This is used
+* to determine the y position of a note being inserted
+* 
+*/</span>
+live_score.highest_clef_pitch = {
+  <span class="hljs-string">"treble"</span>:<span class="hljs-string">"g/6"</span>
+};
+
+<span class="hljs-comment">/**
+* the pitch that all rests are displayed at
+*/</span>
+live_score.rest_pitch = <span class="hljs-string">"d/5"</span>;
+
+<span class="hljs-comment">/**
+* in live_score.Note, this how a rest is denoted
+*/</span>
+live_score.rest_type = <span class="hljs-string">"r"</span>;
+
+<span class="hljs-comment">/**
+* in live_score.Note, this how a note is denoted
+*/</span>
+live_score.note_type = <span class="hljs-string">"n"</span>;
+
+<span class="hljs-comment">/**
+* the string denoting that the ui is in "insert mode"
+*/</span>
+live_score.insert_mode = <span class="hljs-string">"insert"</span>;
+
+<span class="hljs-comment">/**
+* the string denoting that the ui is in "remove mode"
+*/</span>
+live_score.remove_mode = <span class="hljs-string">"remove"</span>;
+
+<span class="hljs-comment">/**
+* translate_pitch_to_midi_number
+*   given a pitch of the style "d/5" d being the note and 5 being the 
+*   octave number, returns the midi note number equivalent
+* args
+*   pitch
+*     a string of the style "d/5" d being the note and 5 being the 
+*     octave number. This is the format used by Vexflow
+* returns
+*   midi_value
+*     an integer representing the pitch value as midi value
+*/</span>
+live_score.translate_pitch_to_midi_number = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">pitch</span>)</span>{
+  <span class="hljs-keyword">var</span> note = pitch.split(<span class="hljs-string">"/"</span>)[<span class="hljs-number">0</span>];
+  note = note.toUpperCase();
+  <span class="hljs-keyword">var</span> octave = pitch.split(<span class="hljs-string">"/"</span>)[<span class="hljs-number">1</span>];
+  note = live_score.note_to_integer_table[note];
+  octave = <span class="hljs-built_in">parseInt</span>(octave,<span class="hljs-number">10</span>);
+  <span class="hljs-keyword">var</span> midi_value = note + ((octave + <span class="hljs-number">1</span>) * <span class="hljs-number">12</span>);
+  <span class="hljs-keyword">return</span> midi_value;
+};
+
+<span class="hljs-comment">/**
+* translate_midi_number_to_pitch
+*   given a midi note value, converts it to a Vexflow style pitch string
+* args
+*   midi_number
+*     an integer representing a pitch value
+* returns
+*   pitch
+*     a string of the style "d/5" d being the note and 5 being the 
+*     octave number. This is the format used by Vexflow
+*/</span>
+live_score.translate_midi_number_to_pitch = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">midi_number</span>)</span>{
+  <span class="hljs-keyword">var</span> note = midi_number%<span class="hljs-number">12</span>;
+  note = live_score.integer_to_note_table[note];
+  <span class="hljs-keyword">var</span> octave = <span class="hljs-built_in">Math</span>.floor(midi_number/<span class="hljs-number">12</span>) - <span class="hljs-number">1</span>;
+  octave = octave.toString();
+  <span class="hljs-keyword">var</span> pitch = note +<span class="hljs-string">"/"</span>+ octave;
+  <span class="hljs-keyword">return</span> pitch;
+};
+
+<span class="hljs-comment">/**
+* a table that converts an integer to its corresponding note name
+*/</span>
+live_score.integer_to_note_table = {
+  <span class="hljs-number">0</span>: <span class="hljs-string">"C"</span>,
+  <span class="hljs-number">1</span>: <span class="hljs-string">"C#"</span>,
+  <span class="hljs-number">2</span>: <span class="hljs-string">"D"</span>,
+  <span class="hljs-number">3</span>: <span class="hljs-string">"D#"</span>,
+  <span class="hljs-number">4</span>: <span class="hljs-string">"E"</span>,
+  <span class="hljs-number">5</span>: <span class="hljs-string">"F"</span>,
+  <span class="hljs-number">6</span>: <span class="hljs-string">"F#"</span>,
+  <span class="hljs-number">7</span>: <span class="hljs-string">"G"</span>,
+  <span class="hljs-number">8</span>: <span class="hljs-string">"G#"</span>,
+  <span class="hljs-number">9</span>: <span class="hljs-string">"A"</span>,
+  <span class="hljs-number">10</span>: <span class="hljs-string">"A#"</span>,
+  <span class="hljs-number">11</span>: <span class="hljs-string">"B"</span>
+};
+
+<span class="hljs-comment">/**
+* a table that converts a note name to its corresponding integer
+*/</span>
+live_score.note_to_integer_table = {
+  <span class="hljs-string">"CBB"</span>:<span class="hljs-number">10</span>,
+  <span class="hljs-string">"CB"</span> :<span class="hljs-number">11</span>,
+  <span class="hljs-string">"C"</span>  :<span class="hljs-number">0</span>,
+  <span class="hljs-string">"C#"</span> :<span class="hljs-number">1</span>,
+  <span class="hljs-string">"C##"</span>:<span class="hljs-number">2</span>,
+  <span class="hljs-string">"DBB"</span>:<span class="hljs-number">0</span>,
+  <span class="hljs-string">"DB"</span> :<span class="hljs-number">1</span>,
+  <span class="hljs-string">"D"</span>  :<span class="hljs-number">2</span>,
+  <span class="hljs-string">"D#"</span> :<span class="hljs-number">3</span>,
+  <span class="hljs-string">"D##"</span>:<span class="hljs-number">4</span>,
+  <span class="hljs-string">"EBB"</span>:<span class="hljs-number">2</span>,
+  <span class="hljs-string">"EB"</span> :<span class="hljs-number">3</span>,
+  <span class="hljs-string">"E"</span>  :<span class="hljs-number">4</span>,
+  <span class="hljs-string">"E#"</span> :<span class="hljs-number">5</span>,
+  <span class="hljs-string">"E##"</span>:<span class="hljs-number">6</span>,
+  <span class="hljs-string">"FBB"</span>:<span class="hljs-number">3</span>,
+  <span class="hljs-string">"FB"</span> :<span class="hljs-number">4</span>,
+  <span class="hljs-string">"F"</span>  :<span class="hljs-number">5</span>,
+  <span class="hljs-string">"F#"</span> :<span class="hljs-number">6</span>,
+  <span class="hljs-string">"F##"</span>:<span class="hljs-number">7</span>,
+  <span class="hljs-string">"GBB"</span>:<span class="hljs-number">5</span>,
+  <span class="hljs-string">"GB"</span> :<span class="hljs-number">6</span>,
+  <span class="hljs-string">"G"</span>  :<span class="hljs-number">7</span>,
+  <span class="hljs-string">"G#"</span> :<span class="hljs-number">8</span>,
+  <span class="hljs-string">"G##"</span>:<span class="hljs-number">9</span>,
+  <span class="hljs-string">"ABB"</span>:<span class="hljs-number">7</span>,
+  <span class="hljs-string">"AB"</span> :<span class="hljs-number">8</span>,
+  <span class="hljs-string">"A"</span>  :<span class="hljs-number">9</span>,
+  <span class="hljs-string">"A#"</span> :<span class="hljs-number">10</span>,
+  <span class="hljs-string">"A##"</span>:<span class="hljs-number">11</span>,
+  <span class="hljs-string">"BBB"</span>:<span class="hljs-number">9</span>,
+  <span class="hljs-string">"BB"</span> :<span class="hljs-number">10</span>,
+  <span class="hljs-string">"B"</span>  :<span class="hljs-number">11</span>,
+  <span class="hljs-string">"B#"</span> :<span class="hljs-number">0</span>,
+  <span class="hljs-string">"B##"</span>:<span class="hljs-number">1</span>
+};
+
+<span class="hljs-comment">/**
+* a object that defines key signatures
+*/</span>
+live_score.keys = {};
+
+<span class="hljs-comment">/**
+* defines the accidentals found in the key of C major
+*/</span>
+live_score.keys.C = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">return</span> {
+    key:<span class="hljs-string">"C"</span>,
+    sharps:[<span class="hljs-number">1</span>,<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">10</span>],
+    flats:[],
+    double_sharps:[],
+    double_flats:[],
+    naturals:[]
+  };
+};
+
+<span class="hljs-comment">/**
+* a constant used by Vexflow to calculate rhythmic positioning
+* also used by live_score for rhythmic position
+* represents the number of ticks in a 4/4 measure
+*/</span>
+live_score.RESOLUTION = Vex.Flow.RESOLUTION;
+
+<span class="hljs-comment">/**
+* note_length_to_ticks
+*   converts a note length into the equivalent number of ticks
+* args
+*   note_length
+*     the note length being converted
+* returns
+*   an integer equal to the number of ticks of note_length
+*/</span>
+live_score.note_length_to_ticks = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">note_length</span>)</span>{
+  <span class="hljs-keyword">return</span> Vex.Flow.RESOLUTION/note_length;
+};
+
+<span class="hljs-comment">/**
+* ticks_to_note_length
+*   converts a number of ticks into the equivalent note_length
+* args
+*   ticks
+*     the number of ticks being converted
+* returns
+*   a note length equivalent to the number of ticks
+*/</span>
+live_score.ticks_to_note_length = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">ticks</span>)</span>{
+  <span class="hljs-keyword">var</span> derived_note_length = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> note_length_name <span class="hljs-keyword">in</span> live_score.note_lengths){
+    <span class="hljs-keyword">var</span> note_length = live_score.note_lengths[note_length_name];
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">Math</span>.round(ticks*note_length) === live_score.RESOLUTION){
+      derived_note_length = note_length;
+    }
+  }
+  <span class="hljs-keyword">return</span> derived_note_length;
+};
+
+<span class="hljs-comment">/**
+* note_length_greater_than
+*   compares to live_score.note_lengths to see if the first is larger than
+*   the second
+* args
+*   note_length_1
+*     the first note length
+*   note_length_2
+*     the second note length
+* returns
+*   a boolean denoting whether note_length_1 was longer than note_length_2
+*   based on there rhythmic lengths
+*/</span>
+live_score.note_length_greater_than = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">note_length_1,note_length_2</span>)</span>{
+  <span class="hljs-keyword">return</span> (note_length_1 &lt; note_length_2);
+};
+
+<span class="hljs-comment">/**
+* interpret_accidental
+*   based on the key signature and previous accidentals in the measure,
+*   determines the appropriate accidental for a note
+* args
+*   pitch
+*     the pitch name of the note
+*   key_signature
+*     an struct (see structs.js) describing the current key
+* returns
+*   accidental
+*     a string with the accidental to be added to the note
+*/</span>
+live_score.interpret_accidental = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">pitch,key_signature</span>)</span>{
+  <span class="hljs-keyword">var</span> midi_num = live_score.note_to_integer_table[pitch.toUpperCase()];
+  <span class="hljs-keyword">var</span> chromatic_note = midi_num % <span class="hljs-number">12</span>;
+  <span class="hljs-keyword">var</span> accidental = <span class="hljs-string">""</span>;
+  <span class="hljs-keyword">if</span>(key_signature.sharps.indexOf(chromatic_note) != <span class="hljs-number">-1</span>){
+    accidental = <span class="hljs-string">"#"</span>;
+    live_score.update_sharps(chromatic_note,key_signature);
+  }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key_signature.flats.indexOf(chromatic_note) != <span class="hljs-number">-1</span>){
+    accidental = <span class="hljs-string">"b"</span>;
+    live_score.update_flats(chromatic_note,key_signature);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key_signature.double_sharps.indexOf(chromatic_note) != <span class="hljs-number">-1</span>){
+    accidental = <span class="hljs-string">"##"</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key_signature.double_flats.indexOf(chromatic_note) != <span class="hljs-number">-1</span>){
+    accidental = <span class="hljs-string">"bb"</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(key_signature.naturals.indexOf(chromatic_note) != <span class="hljs-number">-1</span>){
+    accidental = <span class="hljs-string">"n"</span>;
+    live_score.update_naturals(chromatic_note,key_signature);
+  }
+
+  <span class="hljs-keyword">return</span> accidental;
+};
+
+<span class="hljs-comment">/**
+* update_sharps
+*   updates the sharps that are used in the key signature for this measure
+*   (a sharped note that follows another sharped note does not need a sharp
+*   if the note is within the same measure and no other accidentals have 
+*   been used for that pitch)
+* args
+*   chromatic_note
+*     the note (0 - 11) that was given a sharp
+*   key_signature
+*     an struct (see structs.js) describing the current key     
+* returns
+*   none
+*/</span>
+live_score.update_sharps = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">chromatic_note,key_signature</span>)</span>{
+   live_score.remove_accidental(chromatic_note,key_signature.sharps);
+   <span class="hljs-keyword">var</span> natural = ((chromatic_note - <span class="hljs-number">1</span>) + <span class="hljs-number">12</span>) % <span class="hljs-number">12</span>;
+   key_signature.naturals.push(natural);
+};
+
+<span class="hljs-comment">/**
+* update_flats
+*   updates the flats that are used in the key signature for this measure
+*   (a flatted note that follows another flatted note does not need a flat
+*   if the note is within the same measure and no other accidentals have 
+*   been used for that pitch)
+* args
+*   chromatic_note
+*     the note (0 - 11) that was given a flat
+*   key_signature
+*     an struct (see structs.js) describing the current key     
+* returns
+*   none
+*/</span>
+live_score.update_flats = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">chromatic_note,key_signature</span>)</span>{
+  live_score.remove_accidental(chromatic_note,key_signature.flats);
+  <span class="hljs-keyword">var</span> natural = (chromatic_note + <span class="hljs-number">1</span>) % <span class="hljs-number">12</span>;
+  key_signature.naturals.push(natural);
+};
+
+<span class="hljs-comment">/**
+* update_naturals
+*   updates the naturals that are used in the key signature for this measure
+*   (a note that follows an altered note must be given a natural if the note
+*   is intended to note used the accidental used by the previous note of the
+*   same pitch that was given an accidental)
+* args
+*   chromatic_note
+*     the note (0 - 11) that was given a natural
+*   key_signature
+*     an struct (see structs.js) describing the current key     
+* returns
+*   none
+*/</span>
+live_score.update_naturals = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">chromatic_note,key_signature</span>)</span>{
+  live_score.remove_accidental(chromatic_note,key_signature.naturals);
+  <span class="hljs-keyword">var</span> original_key_sig = live_score.keys[key_signature.key.toUpperCase()]();
+  <span class="hljs-keyword">var</span> sharp = (chromatic_note + <span class="hljs-number">1</span>) % <span class="hljs-number">12</span>;
+  <span class="hljs-keyword">var</span> flat = ((chromatic_note - <span class="hljs-number">1</span>) + <span class="hljs-number">12</span>) % <span class="hljs-number">12</span>;
+  <span class="hljs-keyword">if</span>(original_key_sig.sharps.indexOf(sharp) != <span class="hljs-number">-1</span>){
+    key_signature.sharps.push(sharp);
+  }
+  <span class="hljs-keyword">if</span>(original_key_sig.sharps.indexOf(flat) != <span class="hljs-number">-1</span>){
+    key_signature.flats.push(flat);
+  }
+};
+
+<span class="hljs-comment">/**
+* remove_accidental
+*   removes an accidental from a key signature
+* args
+*   chromatic_note
+*     the note (0 - 11) that was given a flat
+*   accidental_list
+*     an array of a type of accidental used in the key
+* returns
+*   accidental_removed
+*     a boolean denoting whether the accidental was removed successfully
+*/</span>
+live_score.remove_accidental = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">chromatic_note,accidental_list</span>)</span>{
+  <span class="hljs-keyword">var</span> accidental_removed = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">var</span> index = accidental_list.indexOf(chromatic_note);
+  <span class="hljs-keyword">if</span>(index &gt; <span class="hljs-number">-1</span>){
+    accidental_list.splice(index,<span class="hljs-number">1</span>);
+    accidental_removed = <span class="hljs-literal">true</span>;
+  }
+  <span class="hljs-keyword">return</span> accidental_removed;
+};
+
+<span class="hljs-comment">/**
+* set_note_length_lcm
+*   find the lowest common multiple of all the note lengths
+*   this can be used to have the number of ticks of each measure
+*   always be divisible by the duration of each note
+* args
+*   none
+* returns
+*   none
+*/</span>
+live_score.set_note_length_lcm = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">var</span> note_lengths = [];
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> note_length <span class="hljs-keyword">in</span> live_score.note_lengths) {
+    note_lengths.push(live_score.note_lengths[note_length]);
+  }
+  live_score.note_length_lcm = live_score.lcm_of_array(note_lengths);
+};
+
+<span class="hljs-comment">/**
+* lcm_of_array
+*   finds the lowest common multiple of an array of integers
+* args
+*   a
+*     an array if integers
+* returns
+*   result
+*     the lcm of the array of integers
+*/</span>
+live_score.lcm_of_array = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">a</span>)</span>{
+  <span class="hljs-keyword">var</span> result = a[<span class="hljs-number">0</span>];
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">1</span>; i &lt; a.length; i++){
+    result = live_score.lcm_of_pair(result, a[i]);
+  }
+  <span class="hljs-keyword">return</span> result;
+};
+
+<span class="hljs-comment">/**
+* lcm_of_pair
+*   finds the lowest common multiple of two numbers
+* args
+*   b
+*     an integer
+*   c
+*     an integer
+* returns
+*   the lcm of b and c
+*/</span>
+
+live_score.lcm_of_pair = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">b, c</span>)</span>{
+  <span class="hljs-keyword">return</span> b * (c / live_score.gcd_of_pair(b,c));
+};
+
+<span class="hljs-comment">/**
+* gcd_of_pair
+*   finds the greatest common divisor of two integers
+* args
+*   b
+*     an integer
+*   c
+*     an integer 
+* returns
+*   b
+*     the greatest common divisor of b and c
+*/</span>
+
+live_score.gcd_of_pair = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">b, c</span>)</span>{
+  <span class="hljs-keyword">while</span>(c &gt; <span class="hljs-number">0</span>){
+    <span class="hljs-keyword">var</span> temp = c;
+    c = b % c;
+    b = temp;
+  }
+  <span class="hljs-keyword">return</span> b;
+};</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

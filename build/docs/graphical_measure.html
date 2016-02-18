@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>graphical_measure.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>graphical_measure.js</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="control_panel.html">
+                    control_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_measure.html">
+                    graphical_measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_note.html">
+                    graphical_note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_object.html">
+                    graphical_object.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_state.html">
+                    graphical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_stave.html">
+                    graphical_stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="live_score.html">
+                    live_score.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="measure.html">
+                    measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="midi_player.html">
+                    midi_player.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="music_constants.html">
+                    music_constants.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="musical_state.html">
+                    musical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note.html">
+                    note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note_popup.html">
+                    note_popup.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="playback_panel.html">
+                    playback_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="renderer.html">
+                    renderer.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_editor.html">
+                    score_editor.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_panel.html">
+                    score_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="stave.html">
+                    stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="structs.html">
+                    structs.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="ui.html">
+                    ui.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="voice.html">
+                    voice.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="z.html">
+                    z.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre>live_score = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./live_score.js"</span>);
+live_score.Graphical_object = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./graphical_object.js"</span>);
+live_score.Graphical_note = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./graphical_note.js"</span>);
+
+<span class="hljs-comment">/**
+* Graphical_measure
+*   stores positional information about the measured displayed in the score
+* args
+*   none
+* returns
+*   none
+*/</span>
+live_score.Graphical_measure = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+
+  <span class="hljs-comment">/**
+  * a Graphical_object (see graphical_object.js) containing the coordinate 
+  * boundaries of a measure
+  */</span>
+  <span class="hljs-keyword">this</span>.bounds = <span class="hljs-keyword">new</span> live_score.Graphical_object();
+  
+  <span class="hljs-comment">/**
+  * an array of Graphical_note objects (see graphical_note.js) representing the
+  * notes contained in this measure
+  */</span>
+  <span class="hljs-keyword">this</span>.notes = [];
+
+   <span class="hljs-comment">/**
+  * an array of Graphical_note objects (see graphical_note.js) representing the
+  * rests contained in this measure
+  */</span>
+  <span class="hljs-keyword">this</span>.rests = [];
+
+  <span class="hljs-comment">/**
+  * The union of the notes and rests arrays
+  */</span>
+  <span class="hljs-keyword">this</span>.score_objects = [];
+
+  <span class="hljs-comment">/**
+  * The number of ticks in this measure as defined by live_score.RESOLUTION
+  */</span>
+  <span class="hljs-keyword">this</span>.num_ticks = <span class="hljs-number">0</span>;
+};
+
+<span class="hljs-comment">/**
+* extract_posiitonal_info
+*   takes vexflow objects and determines where they are rendered on the score
+* args
+*   previous_measure
+*     a graphical_object containing the bounds of the previous measure
+*   current_measure
+*     an object representing a barline, created by Vexflow, that is displayed
+*     in the score
+*   measure_contents
+*     an array of vexflow objects rendered within the bounds of the measure
+* returns
+*   none
+*/</span>
+live_score.Graphical_measure.prototype.extract_positional_info = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+  previous_measure,current_measure,measure_contents</span>)</span>{
+  
+  <span class="hljs-keyword">this</span>.extract_measure_info(previous_measure,current_measure);
+    
+  <span class="hljs-keyword">var</span> measure_position = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; measure_contents.length; i++){
+    <span class="hljs-keyword">var</span> score_object = measure_contents[i];
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.is_note(score_object)){
+      <span class="hljs-keyword">this</span>.add_note(score_object,measure_position);   
+    }<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.is_rest(score_object)){
+      <span class="hljs-keyword">this</span>.add_rest(score_object,measure_position);
+    }
+    measure_position += live_score.note_length_to_ticks(score_object.duration);
+  }
+  <span class="hljs-keyword">this</span>.num_ticks = measure_position; 
+};
+
+<span class="hljs-comment">/**
+* extract_measure_info
+*   extracts positional information from the Vexflow object and 
+*   uses that information to determine the positioning of a measure
+* args
+*   previous_measure
+*     a graphical_object containing the bounds of the previous measure
+*   current_measure
+*     an object representing a barline, created by Vexflow, that is displayed
+*     in the score
+* returns
+*   none
+*/</span>
+live_score.Graphical_measure.prototype.extract_measure_info = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+  previous_measure,current_measure</span>)</span>{
+  
+  <span class="hljs-keyword">if</span>(previous_measure === <span class="hljs-literal">null</span>){
+    <span class="hljs-keyword">this</span>.bounds.start_x = current_measure.stave.start_x;
+  }<span class="hljs-keyword">else</span>{
+    <span class="hljs-keyword">this</span>.bounds.start_x = previous_measure.end_x + <span class="hljs-number">1</span>;
+  } 
+  <span class="hljs-keyword">this</span>.bounds.end_x = current_measure.getAbsoluteX();
+  <span class="hljs-keyword">this</span>.bounds.start_y = current_measure.stave.bounds.y;
+  <span class="hljs-keyword">this</span>.bounds.end_y = current_measure.stave.bounds.y + 
+                        current_measure.stave.height; 
+};
+
+<span class="hljs-comment">/**
+* is_note
+*   checks if a given score_object is a note
+* args
+*   score_object
+*     an object, created by Vexflow that is displayed in the score
+* returns
+*   a boolean value denoting whether the score_object is a note
+*/</span>
+live_score.Graphical_measure.prototype.is_note = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">score_object</span>)</span>{
+  <span class="hljs-keyword">return</span> (score_object.noteType &amp;&amp; 
+          score_object.noteType === <span class="hljs-string">"n"</span> &amp;&amp; 
+          score_object.duration !== <span class="hljs-string">"b"</span>);
+};
+
+<span class="hljs-comment">/**
+* is_rest
+*   checks if a given score_object is a rest
+* args
+*   score_object
+*     an object, created by Vexflow that is displayed in the score
+* returns
+*   a boolean value denoting whether the score_object is a rest
+*/</span>
+live_score.Graphical_measure.prototype.is_rest = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">score_object</span>)</span>{
+  <span class="hljs-keyword">return</span> (score_object.noteType &amp;&amp; 
+          score_object.noteType === <span class="hljs-string">"r"</span> &amp;&amp; 
+          score_object.duration !== <span class="hljs-string">"b"</span>);
+};
+
+<span class="hljs-comment">/**
+* add_note
+*   adds a Graphical_note (see Graphical_note.js) to the array of notes 
+*   contained within the measure
+* args
+*   note_object
+*     an object, created by Vexflow that is displayed in the score
+*   measure_position
+*     the starting position of the note being added (in ticks)
+* returns
+*   none
+*/</span>
+live_score.Graphical_measure.prototype.add_note = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">note_object,
+  measure_position</span>)</span>{
+
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; note_object.note_heads.length; i++){
+    <span class="hljs-keyword">var</span> note_head = note_object.note_heads[i];
+    <span class="hljs-keyword">var</span> pitch = note_object.keyProps[i].key + <span class="hljs-string">"/"</span> + 
+      note_object.keyProps[i].octave;
+
+    <span class="hljs-keyword">var</span> gn = <span class="hljs-keyword">new</span> live_score.Graphical_note();
+    gn.extract_positional_info(note_head,measure_position,pitch);
+
+    <span class="hljs-keyword">this</span>.notes.push(gn);
+    <span class="hljs-keyword">this</span>.score_objects.push(gn);
+  }
+};
+
+<span class="hljs-comment">/**
+* add_note
+*   adds a rest (see Graphical_note.js) to the array of rests
+*   contained within the measure
+* args
+*   rest_object
+*     an object, created by Vexflow that is displayed in the score
+*   measure_position
+*     the starting position of the rest being added (in ticks)
+* returns
+*   none
+*/</span>
+live_score.Graphical_measure.prototype.add_rest = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">rest_object,
+  measure_position</span>)</span>{
+
+  <span class="hljs-keyword">var</span> gn = <span class="hljs-keyword">new</span> live_score.Graphical_note();
+  gn.extract_rest_info(rest_object,measure_position);
+  <span class="hljs-keyword">this</span>.rests.push(gn);
+  <span class="hljs-keyword">this</span>.score_objects.push(gn);
+};
+
+<span class="hljs-comment">/**
+* contains
+*   checks if a set of coordinates is within the bounds of the measure
+* args
+*   graphical_object
+*     a Graphical_object (see graphical_object.js) containing coordinates
+* returns
+*   a boolean of whether the area described by graphical_object overlaps with
+*   the measure
+*/</span>
+live_score.Graphical_measure.prototype.contains = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">graphical_object</span>)</span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.bounds.intersects_area(graphical_object);
+};
+
+<span class="hljs-comment">/**
+* lookup_note
+*   determines if the bounds of a graphical object overlap with the position
+*   of a note in the score
+* args
+*   graphical_object
+*     a graphical_object containing the coordinates being checked against the
+*     coordinates of the notes in the score
+*   note_info
+*     a struct, described in structs.js, with information about the note
+* returns
+*   none
+*/</span>
+live_score.Graphical_measure.prototype.get_note_info = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">graphical_object,
+  note_info, is_new_note</span>)</span>{
+
+  <span class="hljs-keyword">if</span>(is_new_note){</pre></div>
+        
+      
+        
+        <p>note_info.x_position = this.get_measure_position_x(graphical_object);</p>
+
+        
+          <div class='highlight'><pre>    note_info.tick_position = <span class="hljs-keyword">this</span>.get_measure_position_x(graphical_object);
+  }<span class="hljs-keyword">else</span>{
+    <span class="hljs-keyword">var</span> note_found = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.notes.length &amp;&amp; !note_found; i++){
+      <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.notes[i].contains(graphical_object)){
+        <span class="hljs-keyword">this</span>.notes[i].get_note_info(note_info);
+        note_found = <span class="hljs-literal">true</span>;
+      }
+    }
+    note_info.note_found = note_found;
+  }
+};
+
+<span class="hljs-comment">/**
+* get_measure_position_x
+*   determines where within a measure a given position is located, this
+*   is used to determine the final x position of the click in relation to
+*   other notes in the score
+* args
+*   graphical_object
+*     coordinates of the new note 
+* returns
+*   fractional_x_position
+*     the percentage of the way through the measure that the position starts
+*/</span>
+live_score.Graphical_measure.prototype.get_measure_position_x = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+  graphical_object</span>)</span>{
+  
+  <span class="hljs-comment">/*
+  var measure_length = this.bounds.end_x - this.bounds.start_x;
+  var position_in_measure = graphical_object.start_x - this.bounds.start_x;
+  var fractional_x_position = position_in_measure/measure_length;
+  return fractional_x_position;
+  */</span>
+  <span class="hljs-keyword">var</span> previous_note = <span class="hljs-keyword">this</span>.get_closest_note_before_position(graphical_object);
+  <span class="hljs-keyword">var</span> next_note = <span class="hljs-keyword">this</span>.get_closest_note_after_position(graphical_object);
+  <span class="hljs-keyword">var</span> tick_position = <span class="hljs-keyword">this</span>.calculate_tick_position(graphical_object,
+    previous_note,next_note);
+ 
+  <span class="hljs-keyword">return</span> tick_position;
+};
+
+<span class="hljs-comment">/**
+* get_closest_note_before_position
+*   finds the closest score object (note or rest), that appears in the score
+*   prior to the point described by the graphical_object
+* args
+*   graphical_object
+*     an object describing a point on the score (see graphical_object.js)
+* returns
+*   the graphical_object of the score object immediately preceding the
+*   graphical_object passed in
+*/</span>
+live_score.Graphical_measure.prototype.get_closest_note_before_position = 
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">graphical_object</span>)</span>{
+  <span class="hljs-keyword">var</span> closest_note;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.score_objects.length; i++){
+    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.score_objects[i].before(graphical_object)){
+      closest_note = <span class="hljs-keyword">this</span>.score_objects[i];
+    }
+  }
+  <span class="hljs-keyword">return</span> closest_note;
+};
+
+<span class="hljs-comment">/**
+* get_closest_note_after_position
+*   finds the closest score object (note or rest), that appears in the score
+*   after the point described by the graphical_object
+* args
+*   graphical_object
+*     an object describing a point on the score (see graphical_object.js)
+* returns
+*   the graphical_object of the score object immediately following the 
+*   graphical_object passed in
+*/</span>
+live_score.Graphical_measure.prototype.get_closest_note_after_position = 
+  <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">graphical_object</span>)</span>{
+  <span class="hljs-keyword">var</span> closest_note;
+  <span class="hljs-keyword">var</span> closest_note_found = <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-keyword">this</span>.score_objects.length &amp;&amp; !closest_note_found; i++){
+    <span class="hljs-keyword">if</span>(!<span class="hljs-keyword">this</span>.score_objects[i].before(graphical_object)){
+      closest_note = <span class="hljs-keyword">this</span>.score_objects[i];
+      closest_note_found = <span class="hljs-literal">true</span>;
+    }
+  }
+  <span class="hljs-keyword">return</span> closest_note;
+};
+
+<span class="hljs-comment">/**
+* calculate_tick_position
+*   given a position and the notes directly preceding and following that
+*   position, calculates the tick position in the measure of the position
+* args
+*   graphical_object
+*     an object describing a point on the score (see graphical_object.js)
+*   previous_note
+*     the score object that immediately preceeds graphical_object in the
+*     measure
+*   next_note
+*     the score object that immediately follows graphical_object in the
+*     measure
+* returns
+*   new_note_tick_position
+*     the position (in ticks) of the note being inserted into the measure
+*/</span>
+live_score.Graphical_measure.prototype.calculate_tick_position = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">
+  graphical_object,previous_note,next_note</span>)</span>{
+  
+  <span class="hljs-keyword">if</span>(previous_note === <span class="hljs-literal">undefined</span>){
+    previous_note = {};
+    previous_note.bounds = {};
+    previous_note.bounds.start_x = <span class="hljs-keyword">this</span>.bounds.start_x;
+    previous_note.position = <span class="hljs-number">0</span>;
+  }
+  <span class="hljs-keyword">if</span>(next_note === <span class="hljs-literal">undefined</span>){
+    next_note = {};
+    next_note.bounds = {};
+    next_note.bounds.start_x = <span class="hljs-keyword">this</span>.bounds.end_x;
+    next_note.position = <span class="hljs-keyword">this</span>.num_ticks;
+  }
+
+  <span class="hljs-keyword">var</span> prev_note_x_pos = previous_note.bounds.start_x;
+  <span class="hljs-keyword">var</span> next_note_x_pos = next_note.bounds.start_x;
+  <span class="hljs-keyword">var</span> distance_between_adjacent_notes = next_note_x_pos - prev_note_x_pos;
+  <span class="hljs-keyword">var</span> new_note_relative_x_pos = graphical_object.start_x - prev_note_x_pos;
+  <span class="hljs-keyword">var</span> new_note_relative_fractional_x_pos = new_note_relative_x_pos/
+    distance_between_adjacent_notes;
+  <span class="hljs-keyword">var</span> tick_distance_between_notes = next_note.position - 
+    previous_note.position;
+  <span class="hljs-keyword">var</span> new_note_tick_position = previous_note.position + 
+    (tick_distance_between_notes * new_note_relative_fractional_x_pos);
+
+  <span class="hljs-keyword">return</span> new_note_tick_position;
+};
+
+<span class="hljs-built_in">module</span>.exports = live_score.Graphical_measure;</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>

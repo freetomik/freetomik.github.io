@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>playback_panel.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>playback_panel.js</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="control_panel.html">
+                    control_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_measure.html">
+                    graphical_measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_note.html">
+                    graphical_note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_object.html">
+                    graphical_object.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_state.html">
+                    graphical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="graphical_stave.html">
+                    graphical_stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="live_score.html">
+                    live_score.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="measure.html">
+                    measure.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="midi_player.html">
+                    midi_player.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="music_constants.html">
+                    music_constants.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="musical_state.html">
+                    musical_state.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note.html">
+                    note.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="note_popup.html">
+                    note_popup.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="playback_panel.html">
+                    playback_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="renderer.html">
+                    renderer.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_editor.html">
+                    score_editor.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="score_panel.html">
+                    score_panel.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="stave.html">
+                    stave.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="structs.html">
+                    structs.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="ui.html">
+                    ui.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="voice.html">
+                    voice.js
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="z.html">
+                    z.js
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre>live_score = <span class="hljs-built_in">require</span>(<span class="hljs-string">"./live_score.js"</span>);
+
+<span class="hljs-comment">/**
+* Playback_panel
+*   ui element containing all the midi playback controls
+* args
+*   event_controller
+*     the object that handles all ui events
+* returns
+*   none
+*/</span>
+live_score.Playback_panel = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event_controller</span>)</span>{
+
+  <span class="hljs-comment">/**
+  * (see function description)
+  */</span>
+  <span class="hljs-keyword">this</span>.event_controller = event_controller;
+
+  <span class="hljs-comment">/**
+  * the html button for playing the notes in the score
+  */</span>
+  <span class="hljs-keyword">this</span>.play_button = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"play_button"</span>);</pre></div>
+        
+      
+        
+        <p>this.play_button.onclick = this.play();</p>
+
+        
+          <div class='highlight'><pre>  <span class="hljs-keyword">this</span>.play_button.onclick = <span class="hljs-keyword">this</span>.export2xml();
+
+};
+
+<span class="hljs-comment">/**
+* export2xml
+*   exports to xml the notes in the score
+* args
+*   none
+* returns
+*   none
+*/</span>
+live_score.Playback_panel.prototype.export2xml = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  event_controller = <span class="hljs-keyword">this</span>.event_controller;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    event_controller.export2xml();
+  };
+};
+
+<span class="hljs-comment">/**
+* play
+*   plays the notes in the score
+* args
+*   none
+* returns
+*   none
+*/</span>
+live_score.Playback_panel.prototype.play = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+  event_controller = <span class="hljs-keyword">this</span>.event_controller;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+    event_controller.play();
+  };
+};
+
+<span class="hljs-built_in">module</span>.exports = live_score.Playback_panel;</pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
