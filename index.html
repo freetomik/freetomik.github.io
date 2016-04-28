@@ -1,56 +1,176 @@
+<!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Web Editor of MusicXML Files</title>
+    <link rel="stylesheet" href="style/style.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
-    <h1 id="page_header"> Live Score v0.4.0 Demo </h1>
+  <div class="page-header">
+    <h1>Web Editor of MusicXML Files</h1>
+  </div>
+<!--   <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+ -->      <nav class="navbar navbar-default navbar-fixed-top">
+        <ul class="nav nav-tabs" id="editor-tabs">
+          <li role="presentation"><a href="#file" onclick="editor.mode='measure';return true;" data-toggle="tab">File</a></li>
+          <li role="presentation"><a href="#measures" onclick="editor.mode='measure';return true;" data-toggle="tab">Measures</a></li>
+          <li role="presentation" class="active"><a href="#notes" onclick="editor.mode='note';return true;" data-toggle="tab">Notes</a></li>
+        </ul>
+        <div class="tab-content" id="control-panel">
+        <div class="tab-pane fade in" id="file">
+          <div class="tool-section">
+            <label>MusicXML File:</label>
+            import<input type="file" id="fileInput">
+            <button onclick="editor.parse.all();">parse</button>
+            <a href="" id="link" onclick="setupDownloadLink(this)" download="">export</a>
+          </div>
+        </div>
+        <div class="tab-pane fade in active" id="measures">
+          <div class="tool-section">
+            <label>Measure:</label>
+            <button onclick="editor.add.measure();">+</button>
+            <button onclick="editor.delete.measure();">-</button>
+          </div>
+          <div class="tool-section">
+            <label>Clef:</label>
+            <select id="clef-dropdown">
+              <option>treble</option>
+              <option>bass</option>
+              <option>alto</option>
+              <option>tenor</option>
+            </select>
+            <button onclick="editor.add.clef();">+</button>
+            <button onclick="editor.delete.clef();">-</button>
+          </div>
+          <div class="tool-section">
+            <label>Key Signature:</label>
+            <select id="key-signature">
+              <option>C</option>
+              <option>G</option>
+              <option>D</option>
+              <option>A</option>
+              <option>E</option>
+              <option>B</option>
+              <option>F#</option>
+              <option>C#</option>
+              <option>F</option>
+              <option>Bb</option>
+              <option>Eb</option>
+              <option>Ab</option>
+              <option>Db</option>
+              <option>Gb</option>
+              <option>Cb</option>
+            </select>
+            <button onclick="editor.add.keySignature();">+</button>
+          </div>
+          <div class="tool-section">
+            <label>Time Signature</label>
+            <select id="timeSigTop">
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4" selected>4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+            <select id="timeSigBottom">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="4" selected>4</option>
+              <option value="8">8</option>
+              <option value="16">16</option>
+            </select>
+            <button onclick="editor.add.timeSignature();">+</button>
+            <button onclick="editor.delete.timeSignature();">-</button>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="notes">
 
-    <div id="live_score_main_panel">
-      <div id="control_panel_top">
-        <span id="quantization_panel">quantization:
-          <select id="quantization_select">
-            <option value="1">whole</option>
-            <option value="2">half</option>
-            <option value="4">quarter</option>
-            <option value="8">eighth</option>
-            <option value="16">sixteeth</option>
-            <option value="32">thirty-second</option>
-          </select> 
-        </span>
-        <span id="input_panel">note length:
-           <select id="note_select"> 
-            <option value="1">whole</option>
-            <option value="2">half</option>
-            <option value="4">quarter</option>
-            <option value="8">eighth</option>
-            <option value="16">sixteeth</option>
-            <option value="32">thirty-second</option>
-          </select> 
-        </span>
+<!--           <div class="tool-section">
+            <input type="radio" name="tools" value="add" checked>Add
+            <input type="radio" name="tools" value="select">Select
+          </div>
+ -->
+          <div class="tool-section">
+            <label>Note: </label>
+            <button onclick="editor.edit.notePitch(1);">^</button>
+            <button onclick="editor.edit.notePitch(-1);">v</button>
+            <button onclick="editor.delete.note();">-</button>
+          </div>
+
+          <div class="tool-section">
+            <label>Dotted:</label>
+            <input type="checkbox" id="dotted-checkbox" onclick="editor.add.dot();"/>
+          </div>
+
+          <br>
+
+          <div class="tool-section">
+            <label>Value:</label>
+            <input type="radio" name="note-value" value="w">1
+            <input type="radio" name="note-value" value="h">1/2
+            <input type="radio" name="note-value" value="q" checked>1/4
+            <input type="radio" name="note-value" value="8">1/8
+            <input type="radio" name="note-value" value="16">1/16
+          </div>
+
+          <div class="tool-section">
+            <label>Accidental:</label>
+            <input type="radio" name="note-accidental" value="n">natural
+            <input type="radio" name="note-accidental" value="#" checked>sharp
+            <input type="radio" name="note-accidental" value="##">double sharp
+            <input type="radio" name="note-accidental" value="b">flat
+            <input type="radio" name="note-accidental" value="bb">double flat
+          </div>
+
+          <div class="tool-section">
+            <button id="add-accidental" onclick="editor.add.accidental();">+</button>
+            <button id="delete-accidental" onclick="editor.delete.accidental();">-</button>
+          </div>
+
+          <div class="tool-section">
+            <label>Note or Rest</label>
+            <input type="radio" name="note-or-rest" value="" checked>Note
+            <input type="radio" name="note-or-rest" value="r">Rest
+          </div>
+
+        </div>
       </div>
-      <div id="middle_panel">
-        <canvas id="score_panel"> </canvas>
-      </div>
-      <div id="control_panel_bottom">
-        <span id="playback_panel">
-          <button id="play_button"> play </button>
-        </span>
-        <span id="cursor_panel">
-          <button id="insert_note"> draw </button>
-          <button id="remove_note"> erase </button>
-        </span>
+      </nav>
+<!--     </div>
+  </div>
+  </div>  
+ -->  
+  <div class="container-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="canvas-wrapper" style="background:#fff;">
+            <svg id="notation-canvas" width="800" height="1056"></svg>
+          </div>
+        </div>
       </div>
     </div>
-    
-    <textarea name="xmlOutput" id="xmlTextAreaOut" cols="30" rows="20" style="display: none;"></textarea>
-  
+  </div>
   </body>
-  <script type="text/javascript">
-    window.onload = function(){
-      var score_editor = new live_score.Score_editor("live_score_main_panel");
-    };
-  </script>
-    <script src='MIDI.js'></script>
-    <!-- // <script src='live_score-min.js'></script> -->
-    <script src='live_score-debug.js'></script>
+  <footer>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="js/vexflow-debug.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/note_tool.js"></script>
+    <script src="js/parse.js"></script>
+    <script src="js/add.js"></script>
+    <script src="js/edit.js"></script>
+    <script src="js/delete.js"></script>
+    <script src="js/draw.js"></script>
+    <script src="js/select.js"></script>
+    <script src="js/listeners.js"></script>
+    <script src="js/file_upload.js"></script>
+    <script src="js/file_download.js"></script>
+    <script src="xml2json.js"></script>
+    <script src="json2xml.js"></script>
+  </footer>
 </html>
