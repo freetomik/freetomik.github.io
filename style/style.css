@@ -1,0 +1,35 @@
+h1 {
+	margin: 40px 0;
+}
+#canvas-wrapper {
+	overflow-y:auto;
+	overflow-x:visible;
+	border:1px solid lightgray;
+}
+.tool-section {
+	margin-right:10px;
+	display:inline;
+}
+.tool-section button {
+	padding: 1px 10px 1px;
+	position:relative;
+	top:-3px;
+}
+.tab-content {
+	border: 1px solid lightgray;
+	position: relative;
+	top: -1px;
+	border-top: 0;
+	padding: 20px 10px;
+}
+.container {
+	margin-top:20px;
+}
+/*svg .measureRect:hover {
+	fill: blue;
+	opacity: 0.1;
+}
+svg .selectedMeasure {
+	fill: blue;
+	opacity: 0.4;
+}*/
