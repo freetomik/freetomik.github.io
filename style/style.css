@@ -1,9 +1,14 @@
+body {
+	padding-top: 150px;
+}
 h1 {
 	margin: 40px 0;
 }
 #canvas-wrapper {
-	overflow-y:auto;
+	/*overflow-y:auto;*/
+	overflow-y:visible;
 	overflow-x:visible;
+	/*overflow-x:scroll;*/
 	border:1px solid lightgray;
 }
 .tool-section {
