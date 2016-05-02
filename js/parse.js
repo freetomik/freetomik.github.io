@@ -1,6 +1,6 @@
 /*
 performs transformation from scoreJson to vfStaves[] and vfStaveNotes[]
-prepares vfStaves[] and vfStaveNotes[] for editor.draw.staves() function
+prepares vfStaves[] and vfStaveNotes[] for editor.draw.score() function
 */
 editor.parse = {
   all: function() {
@@ -75,7 +75,7 @@ editor.parse = {
       }
 
       if(attributes.key) {
-        if(attributes.key.fifths) {
+        if(attributes.key.hasOwnProperty('fifths')) {
           var fifths = +attributes.key.fifths;
           if(fifths == 0)
             keySpec = 'C';
@@ -108,20 +108,6 @@ editor.parse = {
 
   note: function(note, measureIndex, noteIndex) {
     var rest = '', step = '', oct = '', dot = '', vfAcc = '';
-    // rest is empty element in MusicXML, to json it is converted as {rest: null}
-    if(note.hasOwnProperty('rest')) {
-      rest = 'r';
-      // key = editor.table.DEFAULT_REST_PITCH;
-      step = 'b';
-      oct = '4';
-    }
-    else if(note.pitch) {
-      // key = note.pitch.step.toLowerCase() + '/' + note.pitch.octave;
-      step = note.pitch.step.toLowerCase();
-      oct = note.pitch.octave;
-      // since this project is yet not interested in how note sounds,
-      // alter element is not needed; accidental is read from accidental element
-    }
     // get MusicXML divisions from attributes for current measure
     var divisions = 1;
     for(var i = 0; i <= measureIndex; i++) {
@@ -138,6 +124,24 @@ editor.parse = {
 
     // console.log(step+'/'+oct+', '+'divisions:'+divisions
     //   +', '+'duration:'+note.duration+' -> '+staveNoteDuration);
+
+    // rest is empty element in MusicXML, to json it is converted as {rest: null}
+    if(note.hasOwnProperty('rest')) {
+      rest = 'r';
+      // key = editor.table.DEFAULT_REST_PITCH;
+      step = 'b';
+      oct = '4';
+      // whole measure rest
+      if(note.rest && note.rest['@measure'] === 'yes')
+        staveNoteDuration = 'w';
+    }
+    else if(note.pitch) {
+      // key = note.pitch.step.toLowerCase() + '/' + note.pitch.octave;
+      step = note.pitch.step.toLowerCase();
+      oct = note.pitch.octave;
+      // since this project is yet not interested in how note sounds,
+      // alter element is not needed; accidental is read from accidental element
+    }
 
     if(note.accidental) {
       // accidental element can have attributes

@@ -3,9 +3,9 @@ editor.edit = {
   notePitch: function(interval){
     // get and parse id of selected note (id='m13n10')
     var mnId = editor.mySelect.note.id;
-    var measureId = mnId.split('n')[0].split('m')[1];
-    var noteId = mnId.split('n')[1];
-    var vfStaveNote = vfStaveNotes[measureId][noteId];
+    var measureIndex = mnId.split('n')[0].split('m')[1];
+    var noteIndex = mnId.split('n')[1];
+    var vfStaveNote = vfStaveNotes[measureIndex][noteIndex];
     // if note is rest, do nothing
     if(vfStaveNote.isRest())
       return;
@@ -29,11 +29,13 @@ editor.edit = {
         vfNote.addDotToAll();
     }
     // replace old note with a transposed one
-    vfStaveNotes[measureId].splice(noteId, 1, vfNote);
+    vfStaveNotes[measureIndex].splice(noteIndex, 1, vfNote);
     // change pitch property in json
-    scoreJson["score-partwise"].part[0].measure[measureId].note[noteId].pitch
-      .step = newKey[0];
-    scoreJson["score-partwise"].part[0].measure[measureId].note[noteId].pitch
+    scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex].pitch
+      .step = newKey[0].toUpperCase();
+    scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex].pitch
       .octave = newKey[newKey.length - 1];
-  }
+  },
+
+  noteDuration: function() {}
 }

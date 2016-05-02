@@ -34,7 +34,7 @@ window.onload = function() {
             // parse json into vexflow structures
             editor.parse.all();
             // draw
-            editor.draw.staves();
+            editor.draw.score();
           }
           catch(err) {
             console.exception(err);

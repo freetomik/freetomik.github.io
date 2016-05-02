@@ -25,7 +25,7 @@ var scoreJson = {
               divisions: 4,
               key: {
                 fifths: 0,
-                mode: 'major',
+                mode: 'major'
               },
               time: {
                 beats: 4,
@@ -39,7 +39,7 @@ var scoreJson = {
             note: [
               {
                 rest: null,
-                duration: 16,
+                duration: 16
               }
             ]
           }
@@ -68,6 +68,7 @@ editor.keySignature = document.getElementById('key-signature');
 editor.timeSigTop = $('#timeSigTop').val();
 editor.timeSigBottom = $('#timeSigBottom').val();
 
+// some default sizes
 editor.staveWidth = 150;
 editor.staveHeight = 140;
 editor.noteWidth = 40;

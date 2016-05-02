@@ -1,26 +1,40 @@
 editor.delete = {
-  measure: function(){
-    if(editor.measures.length > 1) {   //protection from removing last remaining measure
-      //TODO: editor.selected.measure can be null/undefined
-      // splice the selected measure
-      console.log('delete:'+editor.selected.measure.selection);
-      editor.measures.splice(editor.selected.measure.selection - 1, 1);
-
-      // reset the selected measure to the measure after the measure that was just deleted
-      // editor.selected.measure.selection = editor.selected.measure.selection + 1;
-      // reset all measure numbers
-      for(i=0; i<editor.measures.length; i++){
-        editor.measures[i].measure = i + 1;
-      }
+  measure: function() {
+    // protection from removing last remaining measure
+    if(scoreJson["score-partwise"].part[0].measure.length <= 1) {
+      // TODO error message "Could not remove last remaining measure"
+      return;
     }
+
+    // TODO attributes need to be solved
+    
+    // TODO clef, timesig and keysig must remain on very first measure
+
+    var measureIndex = +editor.mySelect.measure.id.split('m')[1];
+
+    // remove measure from global arrays
+    vfStaves.splice(measureIndex, 1);
+    xmlAttributes.splice(measureIndex, 1);
+    vfStaveNotes.splice(measureIndex, 1);
+
+    // remove measure from scoreJson
+    scoreJson["score-partwise"].part[0].measure.splice(measureIndex, 1);
+
+    // shift numbering for all following measures in part
+    for(var m = measureIndex; m < scoreJson["score-partwise"].part[0].measure.length; m++) {
+      scoreJson["score-partwise"].part[0].measure[m]["@number"] = m;
+    }
+    // if deleted measure was last, mark current last measure as selected
+    if(measureIndex >= scoreJson["score-partwise"].part[0].measure.length - 1)
+      editor.mySelect.measure.id = 'm'+(scoreJson["score-partwise"].part[0].measure.length - 1);
   },
   // deletes note by replacing it with a rest of the same duration
   note: function(){
     // get and parse id of selected note (id='m13n10')
     var mnId = editor.mySelect.note.id;
-    var measureId = mnId.split('n')[0].split('m')[1];
-    var noteId = mnId.split('n')[1];
-    var vfStaveNote = vfStaveNotes[measureId][noteId];
+    var measureIndex = mnId.split('n')[0].split('m')[1];
+    var noteIndex = mnId.split('n')[1];
+    var vfStaveNote = vfStaveNotes[measureIndex][noteIndex];
     // if note is already a rest, do nothing
     if(vfStaveNote.isRest())
       return;
@@ -40,11 +54,13 @@ editor.delete = {
         vfRest.addDotToAll();
     }
     // replace deleted note with a rest
-    vfStaveNotes[measureId].splice(noteId, 1, vfRest);
+    vfStaveNotes[measureIndex].splice(noteIndex, 1, vfRest);
     // delete pitch property from json
-    delete scoreJson["score-partwise"].part[0].measure[measureId].note[noteId].pitch;
+    delete scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex].pitch;
+    // delete accidental if any
+    delete scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex].accidental;
     // create empty rest property
-    scoreJson["score-partwise"].part[0].measure[measureId].note[noteId]['rest'] = null;
+    scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex]['rest'] = null;
     // I assume, that property order does not matter
     // also, currently I don't delete some non-rest elements, like stem, lyric, notations (e.g.slur)
   },
