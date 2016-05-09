@@ -17,12 +17,9 @@ editor.NoteTool = {};
     editor.NoteTool.getDurationFromStaveNote = function getDurationFromStaveNote(staveNote, divisions) {
         var noteType = staveNote.getDuration();
         var numDots;
-        // I don't have -concerto-num-dots property in staveNote
-        // in case you want to use this function, get numDots in some other way,
-        // probably this way: numDots = staveNote.dots;
-        // maybe staveNote.dots property was added to vexflow after Concerto was completed
-        if (staveNote['-concerto-num-dots'])
-            numDots = staveNote['-concerto-num-dots'];
+
+        if(staveNote.isDotted())
+            numDots = staveNote.dots;
         else
             numDots = 0;
 
@@ -53,6 +50,7 @@ editor.NoteTool = {};
         }
 
         if (count === 20)
+            // TODO throw exception
             console.error('No proper StaveNote type');
 
         var dots = 0;
@@ -108,6 +106,7 @@ editor.NoteTool = {};
     // key: 'c/4'
     // interval: 2
     // return: 'e/4'
+    // TODO perform automated testing to proof complete correctness
     editor.NoteTool.transposeNote = function transposeNote(key, interval) {
         var step = key[0];
         var octave = +key[key.length - 1];

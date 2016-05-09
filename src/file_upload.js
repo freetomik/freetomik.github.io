@@ -10,31 +10,19 @@ window.onload = function() {
       if(fileInput.files[0].size > maxFileSize)
         throw 'Uploaded file size exceeded is bigger than 2MB.';
 
-      if (file.type.match(/.xml/)) {  //TODO: make limit for file size also
+      if (file.type.match(/.xml/)) {
         // $('#renderButton').show();
         // $('#clearButton').show();
         console.log('xml file Uploaded');      
         // $('#msgArea').html("");
         var reader = new FileReader();
 
-        reader.onload = function(e) {             // after FileReader finishes reading:
+        // after FileReader finishes reading:
+        reader.onload = function(e) {
           try {
-            // parse xml using jQuery into xml document object
-            var xmlDoc = $.parseXML(reader.result);
-            if(xmlDoc.documentElement.nodeName !== "score-partwise")
-              throw 'Uploaded file is not MusicXML score-partwise file.';
+            initUI();
             uploadedFileName = file.name;
-            //TODO: use xml2json and json2xml accordingly to it's license (LGPL 2.1)
-            // convert xml to json for faster access
-            jsonFromXml = xml2json(xmlDoc, '  ');  
-            // load json to memory; parseJSON is safer than eval
-            scoreJson = $.parseJSON(jsonFromXml);  
-            // turn some only properties into one element array
-            scoreJson = onlyChildren2Array(scoreJson);
-            // parse json into vexflow structures
-            editor.parse.all();
-            // draw
-            editor.draw.score();
+            loadAndDraw(reader.result);
           }
           catch(err) {
             console.exception(err);
@@ -65,9 +53,50 @@ function onlyChildren2Array(scoreJson) {
   if(! $.isArray(scoreJson["score-partwise"].part[0].measure) )
     scoreJson["score-partwise"].part[0].measure =
       [ scoreJson["score-partwise"].part[0].measure ];
-  for (var i in scoreJson["score-partwise"].part[0].measure)
+  for(var i = 0; i < scoreJson["score-partwise"].part[0].measure.length; i++)
     if(! $.isArray(scoreJson["score-partwise"].part[0].measure[i].note) )
       scoreJson["score-partwise"].part[0].measure[i].note =
         [ scoreJson["score-partwise"].part[0].measure[i].note ];
   return scoreJson;
+}
+
+function loadAndDraw(inputFile) {
+  // parse xml using jQuery into xml document object
+  if(typeof inputFile === 'string')
+    var xmlDoc = $.parseXML(inputFile);
+  else
+    var xmlDoc = inputFile;
+  if(xmlDoc.documentElement.nodeName !== "score-partwise")
+    throw 'Uploaded file is not MusicXML score-partwise file.';
+  //TODO: use xml2json and json2xml accordingly to it's license (LGPL 2.1)
+  // convert xml to json for faster access
+  jsonFromXml = xml2json(xmlDoc, '  ');  
+  // load json to memory; parseJSON is safer than eval
+  scoreJson = $.parseJSON(jsonFromXml);  
+  // turn some only properties into one element array
+  scoreJson = onlyChildren2Array(scoreJson);
+  // parse json into vexflow structures
+  editor.parse.all();
+  // draw
+  editor.draw.score();
+}
+
+function parseAndDraw() {
+  editor.parse.all();
+  editor.draw.score();
+}
+
+function loadExample(url) {
+  // body...
+  console.log(url);
+  $.ajax({
+      url: url,
+      data: null,
+      success: function(data) {
+        initUI();
+        uploadedFileName = 'example.xml';
+        loadAndDraw(data);
+      },
+      dataType: 'xml'
+  });
 }

@@ -1,10 +1,10 @@
 body {
-	padding-top: 150px;
+	padding-top: 160px;
 }
 h1 {
 	margin: 40px 0;
 }
-#canvas-wrapper {
+#svg-wrapper {
 	/*overflow-y:auto;*/
 	overflow-y:visible;
 	overflow-x:visible;
@@ -38,3 +38,22 @@ svg .selectedMeasure {
 	fill: blue;
 	opacity: 0.4;
 }*/
+
+input[type="radio"]+label>img {
+	cursor: pointer;
+	padding: 5px;
+}
+
+input[type="radio"]:checked+label>img {
+	border: 1px solid red;
+} 
+
+.biggerIcon {
+	width: 50%;
+	height: 50%;
+}
+
+.smallerIcon {
+	width: 70%;
+	height: 70%;
+}

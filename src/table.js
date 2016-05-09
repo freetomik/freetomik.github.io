@@ -75,17 +75,17 @@ editor.table.CLEF_TYPE_DICT = {
 };
 
 editor.table.CLEF_VEX_TYPE_DICT = {
-           'treble': { sign: 'G', line: 2 },
-             'bass': { sign: 'F', line: 4 },
-             'alto': { sign: 'C', line: 3 },
-            'tenor': { sign: 'C', line: 4 },
-          'soprano': { sign: 'C', line: 1 },
-    'mezzo-soprano': { sign: 'C', line: 2 },
-       'baritone-c': { sign: 'C', line: 5 },
-       'baritone-f': { sign: 'F', line: 3 },
-          'subbass': { sign: 'F', line: 5 },
-           'french': { sign: 'G', line: 1 },
-       'percussion': { sign: 'percussion', line: 2 }
+           'treble': 'G/2',
+             'bass': 'F/4',
+             'alto': 'C/3',
+            'tenor': 'C/4',
+          'soprano': 'C/1',
+    'mezzo-soprano': 'C/2',
+       'baritone-c': 'C/5',
+       'baritone-f': 'F/3',
+          'subbass': 'F/5',
+           'french': 'G/1',
+       'percussion': 'percussion/2'
 };
 
 editor.table.STAVE_DEFAULT_OPTIONS = {

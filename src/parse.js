@@ -1,37 +1,28 @@
 /*
-performs transformation from scoreJson to vfStaves[] and vfStaveNotes[]
-prepares vfStaves[] and vfStaveNotes[] for editor.draw.score() function
+performs transformation from scoreJson to gl_VfStaves[] and gl_VfStaveNotes[]
+prepares gl_VfStaves[] and gl_VfStaveNotes[] for editor.draw.score() function
 */
 editor.parse = {
   all: function() {
     console.log('parse');
     // clear global arrays
-    vfStaves = [];
-    vfStaveNotes = [];
-    xmlAttributes = [];
+    gl_VfStaves = [];
+    gl_VfStaveNotes = [];
+    gl_StaveAttributes = [];
 
     var vfStave;
     // loop over all <measures>(MusicXML measures) and make Vex.Flow.Staves from them
     for(var i = 0; i < scoreJson["score-partwise"].part[0].measure.length; i++) {
-      vfStave = editor.parse.measure(scoreJson["score-partwise"].part[0].measure[i], i);
+      vfStave = editor.parse.attributes(i);
 
-      vfStave = editor.parse.attributes(vfStave, i);
+      vfStave = editor.parse.measure(scoreJson["score-partwise"].part[0].measure[i], i, vfStave);
 
       // push measure to global array, draw() will read from it
-      vfStaves.push(vfStave);
+      gl_VfStaves.push(vfStave);
     }
   },
 
-  measure: function(measure, index) {
-    // one Vex.Flow.Stave corresponds to one <measure>
-    var vfStave = new Vex.Flow.Stave(0, 0, editor.staveWidth);
-
-    // push attributes for measure to global array of attributes for measures
-    if(measure['attributes'])
-      xmlAttributes.push(measure['attributes']);
-    else
-      xmlAttributes.push({});
-
+  measure: function(measure, index, vfStave) {
     var vfStaveNote, vfStaveNotesPerMeasure = [];
     if(measure.note) {
       // loop over all notes in measure
@@ -39,12 +30,14 @@ editor.parse = {
         vfStaveNote = editor.parse.note(measure.note[i], index, i);
         vfStaveNotesPerMeasure.push(vfStaveNote);
       }
-      vfStaveNotes.push(vfStaveNotesPerMeasure);
+      gl_VfStaveNotes.push(vfStaveNotesPerMeasure);
       // width of measure directly proportional to number of notes
       vfStave.setWidth(vfStaveNotesPerMeasure.length * editor.noteWidth);
+      if(vfStave.getWidth() < editor.staveWidth)
+        vfStave.setWidth(editor.staveWidth);
     }
     else    // measure doesn't have notes
-      vfStaveNotes.push([]);
+      gl_VfStaveNotes.push([]);
 
     if(measure['@width']) {
       // in MusicXML measure width unit is one tenth of interline space
@@ -54,66 +47,94 @@ editor.parse = {
     return vfStave;
   },
 
-  attributes: function(vfStave, measureIndex) {
-    // setting attributes for measure
-    if(! $.isEmptyObject(xmlAttributes[measureIndex])) {
-      attributes = xmlAttributes[measureIndex];
+  attributes: function(measureIndex) {
+    var xmlAttributes = scoreJson["score-partwise"].part[0].measure[measureIndex]['attributes'] || {};
 
-      if(attributes.clef) {
-        if($.isArray(attributes.clef)) {
+    var staveAttributes = {
+      // intentionally commented, by default is this object empty
+      // just to show which properties object may contain
+      // xmlClef: '',
+      // vfClef: '',
+      // xmlFifths: 0,
+      // xmlDivisions: 4,
+      // vfKeySpec: '',
+      // vfTimeSpec: '' 
+    };
+
+    // create one Vex.Flow.Stave, it corresponds to one <measure>
+    var vfStave = new Vex.Flow.Stave(0, 0, editor.staveWidth);
+
+    // setting attributes for measure
+    if(! $.isEmptyObject(xmlAttributes)) {
+
+      if(xmlAttributes.clef) {
+        if($.isArray(xmlAttributes.clef)) {
           console.warn("Multiple clefs for measure currently not supported.");
-          var clef = attributes.clef[0];
+          var clef = xmlAttributes.clef[0];
         }
         else
-          var clef = attributes.clef;
+          var clef = xmlAttributes.clef;
 
-        var xmlClefType = clef.sign + '/' + clef.line;
-        var vfClefType = editor.table.CLEF_TYPE_DICT[xmlClefType];
-        vfStave.setClef(vfClefType);  
+        staveAttributes.xmlClef = clef.sign + '/' + clef.line;
+        staveAttributes.vfClef = editor.table.CLEF_TYPE_DICT[staveAttributes.xmlClef];
+        vfStave.setClef(staveAttributes.vfClef);  
         vfStave.setWidth(vfStave.getWidth() + 80);
-        editor.currentClef = vfClefType;
+        // editor.currentClef = vfClefType;
       }
 
-      if(attributes.key) {
-        if(attributes.key.hasOwnProperty('fifths')) {
-          var fifths = +attributes.key.fifths;
-          if(fifths == 0)
+      if(xmlAttributes.key) {
+        if(xmlAttributes.key.hasOwnProperty('fifths')) {
+          var fifths = +xmlAttributes.key.fifths;
+          if(fifths === 0)
             keySpec = 'C';
           else if(fifths > 0)
             keySpec = editor.table.SHARP_MAJOR_KEY_SIGNATURES[fifths - 1];
           else
             keySpec = editor.table.FLAT_MAJOR_KEY_SIGNATURES[-fifths - 1];
-          // var keySig = new Vex.Flow.KeySignature(keySpec);
-          // keySig.addToStave(vfStave);
           vfStave.setKeySignature(keySpec);
           vfStave.setWidth(vfStave.getWidth() + (Math.abs(fifths) * 30));
-          editor.currentKeySig = keySpec;
+          staveAttributes.vfKeySpec = keySpec;
+          staveAttributes.xmlFifths = fifths;
+          // editor.currentKeySig = keySpec;
         }
       }
 
-      if(attributes.time) {
-        if($.isArray(attributes.time)) {
+      if(xmlAttributes.time) {
+        if($.isArray(xmlAttributes.time)) {
           console.warn("Multiple pairs of beats and beat-type elements in time signature not supported.");
-          var time = attributes.time[0];
+          var time = xmlAttributes.time[0];
         }
         else
-          var time = attributes.time;
+          var time = xmlAttributes.time;
 
-        vfStave.setTimeSignature(time.beats + '/' + time['beat-type']);
-        vfStave.setWidth(vfStave.getWidth() + 100);
+        var timeSpec = time.beats + '/' + time['beat-type'];
+        vfStave.setTimeSignature(timeSpec);
+        vfStave.setWidth(vfStave.getWidth() + 80);
+        staveAttributes.vfTimeSpec = timeSpec;
+        // editor.currentTimeSig = timeSpec;
       }
+
+      if(xmlAttributes.divisions) {
+        staveAttributes.xmlDivisions = xmlAttributes.divisions;
+      }
+
     }
+
+    // push attributes to global array
+    gl_StaveAttributes.push(staveAttributes);
+
     return vfStave;
   },
 
   note: function(note, measureIndex, noteIndex) {
     var rest = '', step = '', oct = '', dot = '', vfAcc = '';
     // get MusicXML divisions from attributes for current measure
-    var divisions = 1;
-    for(var i = 0; i <= measureIndex; i++) {
-      if(xmlAttributes[i].divisions !== undefined)
-        divisions = xmlAttributes[i].divisions;
-    }
+    var divisions = 4;
+    // for(var i = 0; i <= measureIndex; i++) {
+    //   if(gl_StaveAttributes[i].xmlDivisions !== undefined)
+    //     divisions = gl_StaveAttributes[i].xmlDivisions;
+    // }
+    divisions = getCurAttrForMeasure(measureIndex, 'xmlDivisions');
 
     // get note length from divisions and duration
     var staveNoteDuration =
@@ -151,9 +172,14 @@ editor.parse = {
       vfAcc = editor.table.ACCIDENTAL_DICT[mXmlAcc];
     }
 
+    // get current clef
+    var currentClef = getCurAttrForMeasure(measureIndex, 'vfClef');
+
     var vfStaveNote = new Vex.Flow.StaveNote({
       keys: [step+vfAcc+'/'+oct],
-      duration: staveNoteDuration+rest
+      duration: staveNoteDuration+rest,
+      clef: rest === '' ? currentClef : 'treble',
+      auto_stem: true
     });
 
     // console.log(vfStaveNote.getKeys().toString()+' '+staveNoteDuration);
