@@ -235,7 +235,7 @@ editor.draw = {
         // highlight selected measure
         if(drawnMeasureIndex === selMeasureIndex)
           $('svg .measureRect#m'+selMeasureIndex)
-            .css({'fill': 'blue', 'opacity': '0.4'});
+            .css({'fill': editor.measureColor, 'opacity': '0.4'});
       }
 
       // if last note is behind width of stave, extend stave

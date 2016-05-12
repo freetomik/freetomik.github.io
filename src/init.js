@@ -75,7 +75,7 @@ editor.staveHeight = 140;
 editor.noteWidth = 40;
 
 editor.mode = "measure";    // measure or note
-
+editor.measureColor = "#428bca";
 
 function initUI() {
   editor.selected = {
@@ -115,5 +115,7 @@ function initUI() {
   $("#clef-dropdown").val("treble");
   // set selected key signature to C
   $("#keySig-dropdown").val("C");
-
+  // set selected time signature to 4/4
+  $("#timeSigTop").val("4");
+  $("#timeSigBottom").val("4");  
 }
