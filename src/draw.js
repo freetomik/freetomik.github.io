@@ -48,8 +48,10 @@ editor.draw = {
       //   $('#svg-container').attr('height', staveY + editor.staveHeight);
 
       // if one measure is wider than canvas(e.g. in Chant.xml), extend canvas
-      if(staveWidth > $('#svg-container').attr('width'))
+      if(staveWidth > $('#svg-container').attr('width')) {
         $('#svg-container').attr('width', staveWidth);
+        // editor.ctx.resize(staveWidth, canvasHeight);
+      }
 
       // set position and width of stave 
       stave.setX(staveX);
@@ -92,8 +94,10 @@ editor.draw = {
       staveX = staveX + staveWidth;
 
       // set height of canvas after last rendered measure
-      if(staveIndex == gl_VfStaves.length - 1)
+      if(staveIndex == gl_VfStaves.length - 1) {
         $('#svg-container').attr('height', staveY + editor.staveHeight);
+        // editor.ctx.resize(canvasWidth, staveY + editor.staveHeight);
+      }
 
     } // loop over measures
 

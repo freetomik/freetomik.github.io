@@ -75,7 +75,7 @@ editor.add = {
     // put new note into scoreJson also
     delete scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex].rest;
     delete scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex]['@measure'];
-    
+
     scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex].pitch = {};
     scoreJson["score-partwise"].part[0].measure[measureIndex].note[noteIndex].pitch
       .step = editor.selected.cursorNoteKey[0].toUpperCase();
@@ -132,7 +132,8 @@ editor.add = {
         vfStave.removeClef();
         delete gl_StaveAttributes[measureIndex].vfClef;
         delete gl_StaveAttributes[measureIndex].xmlClef;
-        delete scoreJson["score-partwise"].part[0].measure[measureIndex].attributes.clef;
+        if(scoreJson["score-partwise"].part[0].measure[measureIndex].attributes)
+          delete scoreJson["score-partwise"].part[0].measure[measureIndex].attributes.clef;
       }
     }
   },
