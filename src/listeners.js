@@ -103,36 +103,35 @@ jQuery.fn.colourNote = function (colour) {
   return this;
 }
 
-$("#clef-dropdown").selectBoxIt();  // use fancy theme for select box
+clefDropdown = $("#clef-dropdown").selectBoxIt().data("selectBox-selectBoxIt");  // use fancy theme for select box
 $("#clef-dropdown").on("change", function() {
   editor.add.clef();
   // editor.draw.selectedMeasure();
   editor.draw.score();
 });
 
-$("#keySig-dropdown").selectBoxIt();
+keySigDropdown = $("#keySig-dropdown").selectBoxIt().data("selectBox-selectBoxIt");
 $("#keySig-dropdown").on("change", function() {
   editor.add.keySignature();
   // editor.draw.selectedMeasure();
   editor.draw.score();
 });
 
-$("#timeSig-button").selectBoxIt();
-$("#timeSig-button").on("click", function() {
-  editor.add.timeSignature();
-  // editor.draw.selectedMeasure();
-  editor.draw.score();
-});
-
-$("#examples-dropdown").selectBoxIt();
+examplesDropdown = $("#examples-dropdown").selectBoxIt().data("selectBox-selectBoxIt");
 $("#examples-dropdown").on("change", function() {
   var url = $("#examples-dropdown").val();
   if(url !== 'default')
     loadExample(url);
 });
 
-$("#timeSigTop").selectBoxIt();
-$("#timeSigBottom").selectBoxIt();
+$("#timeSig-button").on("click", function() {
+  editor.add.timeSignature();
+  // editor.draw.selectedMeasure();
+  editor.draw.score();
+});
+
+timeSigTop = $("#timeSigTop").selectBoxIt().data("selectBox-selectBoxIt");
+timeSigBottom = $("#timeSigBottom").selectBoxIt().data("selectBox-selectBoxIt");
 
 // setting/removing accidental to/from note via radio buttons
 $("input:radio[name='note-accidental']").on("click",function() {
