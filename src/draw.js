@@ -125,8 +125,8 @@ editor.draw = {
     var timeSig = gl_StaveAttributes[drawnMeasureIndex].vfTimeSpec;
     if(timeSig) stave.setTimeSignature(timeSig);
 
-    // svg measure group
-    editor.ctx.openGroup("measure", "m"+drawnMeasureIndex, {pointerBBox: true});
+    // svg stave(=measure) group
+    editor.ctx.openGroup("stave", "m"+drawnMeasureIndex, {pointerBBox: true});
       // draw stave
       stave.draw();
 

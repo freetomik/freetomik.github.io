@@ -1,10 +1,8 @@
 /** Web Editor of MusicXML Files
   *
-  * This project is based on Vexflow Notation Editor by Myles English, 2015
-  * https://github.com/Bijingus/vexflow-notation-editor
-  *
-  * Reimplementation made by Tomas Hudziec, 2016
+  * (c) Thomas Hudziec, 2016
   * https://github.com/freetomik/web-musicxml-editor
+  * MIT license
  */
 
 scoreJson = {
@@ -64,11 +62,6 @@ editor.svgElem = $("#svg-container")[0];
 editor.renderer = new Vex.Flow.Renderer(editor.svgElem, Vex.Flow.Renderer.Backends.SVG);
 editor.ctx = editor.renderer.getContext();    //SVGContext
 
-editor.clefDropdown = document.getElementById('clef-dropdown');
-editor.keySignature = document.getElementById('key-signature');
-editor.timeSigTop = $('#timeSigTop').val();
-editor.timeSigBottom = $('#timeSigBottom').val();
-
 // some default sizes
 editor.staveWidth = 150;
 editor.staveHeight = 140;
@@ -79,7 +72,7 @@ editor.measureColor = "#428bca";
 
 function initUI() {
   editor.selected = {
-    cursorNoteKey: '',
+    cursorNoteKey: 'b/4',
     measure: {
       id: 'm0',
       previousId: 'm0'

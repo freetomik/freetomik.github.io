@@ -108,25 +108,25 @@
 
             <div class="tool-section">
               <label>Duration:</label>
-              <input type="radio" name="note-value" id="note_1" value="w" checked="true">
+              <input type="radio" name="note-value" id="note_1" value="w" checked>
               <label for="note_1">
-                <img src="icons/note_1.svg" class="smallerIcon" alt="whole note" width="50%" height="50%">
+                <img src="icons/note_1.svg" class="smallerIcon" alt="whole note">
               </label>
               <input type="radio" name="note-value" id="note_2" value="h">
               <label for="note_2">
-                <img src="icons/note_2.svg" class="biggerIcon" alt="half note" width="30%" height="30%">
+                <img src="icons/note_2.svg" class="biggerIcon" alt="half note">
               </label>
               <input type="radio" name="note-value" id="note_4" value="q">
               <label for="note_4">
-                <img src="icons/note_4.svg" class="biggerIcon" alt="quarter note" width="30%" height="30%">
+                <img src="icons/note_4.svg" class="biggerIcon" alt="quarter note">
               </label>
               <input type="radio" name="note-value" id="note_8" value="8">
               <label for="note_8">
-                <img src="icons/note_8.svg" class="smallerIcon" alt="8th note" width="50%" height="50%">
+                <img src="icons/note_8.svg" class="smallerIcon" alt="8th note">
               </label>
               <input type="radio" name="note-value" id="note_16" value="16">
               <label for="note_16">
-                <img src="icons/note_16.svg" class="smallerIcon" alt="16th note" width="50%" height="50%">
+                <img src="icons/note_16.svg" class="smallerIcon" alt="16th note">
               </label>
             </div>
 
@@ -182,39 +182,39 @@
         </div>
       </div>
     </div>
+
+    <footer>
+      <!-- remote libraries -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+      <!-- local libraries -->
+      <script src="lib/vexflow-debug.js"></script>
+      <script src="lib/bootstrap-filestyle.min.js"></script>
+      <script src="lib/jquery-ui.min.js"></script>
+      <script src="lib/jquery.selectBoxIt.min.js"></script>
+      <script src="lib/xml2json.js"></script>
+      <script src="lib/json2xml.js"></script>
+      <!-- sources -->
+      <script src="src/vexflow_extension.js"></script>
+      <script src="src/init.js"></script>
+      <script src="src/util.js"></script>
+      <script src="src/table.js"></script>
+      <script src="src/note_tool.js"></script>
+      <script src="src/parse.js"></script>
+      <script src="src/add.js"></script>
+      <script src="src/edit.js"></script>
+      <script src="src/delete.js"></script>
+      <script src="src/draw.js"></script>
+      <script src="src/listeners.js"></script>
+      <script src="src/file_upload.js"></script>
+      <script src="src/file_download.js"></script>
+      <!-- initialization -->
+      <script>
+        initUI();
+        editor.parse.all();
+        switchToNoteMode();
+      </script>
+    </footer>
+    
   </body>
-
-  <footer>
-    <!-- remote libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <!-- local libraries -->
-    <script src="lib/vexflow-debug.js"></script>
-    <script src="lib/bootstrap-filestyle.min.js"></script>
-    <script src="lib/jquery-ui.min.js"></script>
-    <script src="lib/jquery.selectBoxIt.min.js"></script>
-    <script src="lib/xml2json.js"></script>
-    <script src="lib/json2xml.js"></script>
-    <!-- sources -->
-    <script src="src/vexflow_extension.js"></script>
-    <script src="src/init.js"></script>
-    <script src="src/util.js"></script>
-    <script src="src/table.js"></script>
-    <script src="src/note_tool.js"></script>
-    <script src="src/parse.js"></script>
-    <script src="src/add.js"></script>
-    <script src="src/edit.js"></script>
-    <script src="src/delete.js"></script>
-    <script src="src/draw.js"></script>
-    <script src="src/listeners.js"></script>
-    <script src="src/file_upload.js"></script>
-    <script src="src/file_download.js"></script>
-    <!-- initialization -->
-    <script>
-      initUI();
-      editor.parse.all();
-      switchToNoteMode();
-    </script>
-  </footer>
-
 </html>

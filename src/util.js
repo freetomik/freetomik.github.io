@@ -167,14 +167,18 @@ function highlightSelectedMeasureProperties() {
   var clef = gl_StaveAttributes[measureIndex].vfClef;
   if(!clef) clef = getCurAttrForMeasure(measureIndex, 'vfClef');
   if(clef) clefDropdown.selectOption(clef);
+  // if(clef) $('#clef-dropdown').val(clef);
   var keySig = gl_StaveAttributes[measureIndex].vfKeySpec;
   if(!keySig) keySig = getCurAttrForMeasure(measureIndex, 'vfKeySpec');
   if(keySig) keySigDropdown.selectOption(keySig);
+  // if(keySig) $('#keySig-dropdown').val(keySig);
   var timeSig = gl_StaveAttributes[measureIndex].vfTimeSpec;
   if(!timeSig) timeSig = getCurAttrForMeasure(measureIndex, 'vfTimeSpec');
   if(timeSig) {
     timeSigTop.selectOption(timeSig.split('/')[0]);
     timeSigBottom.selectOption(timeSig.split('/')[1]);
+    // $('#timeSigTop').val(timeSig.split('/')[0]);
+    // $('#timeSigBottom').val(timeSig.split('/')[1]);
   }
 }
 
