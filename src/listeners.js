@@ -1,11 +1,3 @@
-// $("#control-panel")[0].addEventListener('click', editor.draw.score);
-// $("#editor-tabs")[0].addEventListener('click', editor.draw.score);
-
-// editor.svgElem.addEventListener('click', editor.select.measure);
-// editor.svgElem.addEventListener('click', editor.select.note);
-// editor.svgElem.addEventListener('click', editor.add.note);
-// editor.svgElem.addEventListener('mousemove', redraw);
-
 // redraw whole score when window resizes
 debouncedResize = null;
 $(window).resize(function() {

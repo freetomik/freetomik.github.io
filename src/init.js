@@ -64,11 +64,6 @@ editor.svgElem = $("#svg-container")[0];
 editor.renderer = new Vex.Flow.Renderer(editor.svgElem, Vex.Flow.Renderer.Backends.SVG);
 editor.ctx = editor.renderer.getContext();    //SVGContext
 
-editor.clefDropdown = document.getElementById('clef-dropdown');
-editor.keySignature = document.getElementById('key-signature');
-editor.timeSigTop = $('#timeSigTop').val();
-editor.timeSigBottom = $('#timeSigBottom').val();
-
 // some default sizes
 editor.staveWidth = 150;
 editor.staveHeight = 140;
@@ -79,7 +74,7 @@ editor.measureColor = "#428bca";
 
 function initUI() {
   editor.selected = {
-    cursorNoteKey: '',
+    cursorNoteKey: 'b/4',
     measure: {
       id: 'm0',
       previousId: 'm0'
