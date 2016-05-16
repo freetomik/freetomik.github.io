@@ -1,14 +1,9 @@
 body {
   padding-top: 160px;
 }
-/*h1 {
-  margin: 40px 0;
-}*/
 #svg-wrapper {
-  /*overflow-y:auto;*/
-  overflow-y:visible;
-  overflow-x:visible;
-  /*overflow-x:scroll;*/
+  overflow-y:auto;
+  overflow-x:auto;
   border:1px solid lightgray;
 }
 .tool-section {
@@ -27,17 +22,10 @@ body {
   border-top: 0;
   padding: 20px 10px;
 }
-.container {
-  /*margin-top:20px;*/
+
+input[type="radio"] {
+  display: none;
 }
-/*svg .measureRect:hover {
-  fill: blue;
-  opacity: 0.1;
-}
-svg .selectedMeasure {
-  fill: blue;
-  opacity: 0.4;
-}*/
 
 input[type="radio"]+label>img {
   cursor: pointer;
