@@ -81,12 +81,6 @@ editor.delete = {
     // uncheck checked accidental radio button
     $("input:radio[name='note-accidental']:checked").prop("checked", false);
   },
-  clef: function(){
-    // editor.measures[editor.selected.measure.selection - 1].clef = null;
-  },
-  timeSignature: function(){
-    // editor.measures[editor.selected.measure.selection - 1].showTimeSig = false;
-  },
   accidental: function(){
     var measureIndex = getSelectedMeasureIndex();
     var noteIndex = getSelectedNoteIndex();

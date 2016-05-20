@@ -1,4 +1,3 @@
-// http://stackoverflow.com/questions/43455/how-do-i-serialize-a-dom-to-xml-text-using-javascript-in-a-cross-browser-way
 function xmlToString(xmlData) {
   try {
     // Gecko- and Webkit-based browsers (Firefox, Chrome), Opera.
@@ -17,9 +16,7 @@ function xmlToString(xmlData) {
   return false;
 }
 
-// http://cwestblog.com/2014/10/21/javascript-creating-a-downloadable-file-in-the-browser/
 function setupDownloadLink(link) {
-  //TODO: use xml2json and json2xml accordingly to it's license (LGPL 2.1)
   var xmlFromJson = json2xml(scoreJson, '  ');
   //TODO: read header from original file
   var xmlHeaderString = '<?xml version="1.0" encoding="UTF-8" standalone="no"?>\n'+
@@ -28,9 +25,17 @@ function setupDownloadLink(link) {
   link.href = 'data:text/xml;charset=utf-8,' + encodeURIComponent(xmlHeaderString + formatXml(xmlFromJson));
 }
 
-// http://stackoverflow.com/questions/376373/pretty-printing-xml-with-javascript
-// answered Mar 24 '10 at 17:18 by schellsan
-// two lines before return added by Tomas Hudziec 2016
+/*
+Project: Code from StackOverflow page
+  http://stackoverflow.com/questions/376373/pretty-printing-xml-with-javascript
+Code authors:
+  Darin Dimitrov - http://stackoverflow.com/users/29407/darin-dimitrov
+  schellsan - http://stackoverflow.com/users/223455/schellsan
+Licensed under CC-Wiki
+  http://creativecommons.org/licenses/by-sa/3.0/
+Modifications:
+  two lines of code before return added by Thomas Hudziec, 2016
+*/
 function formatXml(xml) {
     var reg = /(>)\s*(<)(\/*)/g;
     var wsexp = / *(.*) +\n/g;
@@ -79,6 +84,7 @@ function formatXml(xml) {
         formatted += padding + ln + '\n';
     }
 
+    // put leaf elements with their text content on one line
     formatted = formatted.replace(/(>)\n\s*(\w+)/g, '$1$2');
 
     // remove <#comment/> elements
