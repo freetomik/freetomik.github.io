@@ -163,6 +163,13 @@ function highlightSelectedNoteProperties() {
 
 // highlights properties of selected measure on control panel
 function highlightSelectedMeasureProperties() {
+
+  // in this function are set options for select boxes,
+  // but selectBoxIt's setOption() triggers change event, which is not desired (jQuery's val() does not)
+  // this is temporary ugly hack with global variable,
+  // and should be replaced with better mechanism
+  gl_selectBoxChangeOnMeasureSelect = true;
+
   var measureIndex = getSelectedMeasureIndex();
   var clef = gl_StaveAttributes[measureIndex].vfClef;
   if(!clef) clef = getCurAttrForMeasure(measureIndex, 'vfClef');
@@ -180,6 +187,8 @@ function highlightSelectedMeasureProperties() {
     // $('#timeSigTop').val(timeSig.split('/')[0]);
     // $('#timeSigBottom').val(timeSig.split('/')[1]);
   }
+
+  gl_selectBoxChangeOnMeasureSelect = false;
 }
 
 function isCursorInBoundingBox(bBox, cursorPos) {

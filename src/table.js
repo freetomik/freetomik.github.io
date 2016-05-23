@@ -1,11 +1,13 @@
-// Concerto Base Libraries.
-// author: Taehoon Moon <panarch@kaist.ac.kr>
-//
-// Table
-//
-// Copyright Taehoon Moon 2014
-
-// minor modifications: Tomas Hudziec 2016
+/*
+Project: Concerto
+  https://github.com/panarch/concerto
+Code authors:
+  Taehoon Moon <panarch@kaist.ac.kr>, 2014
+Licensed under MIT license
+  https://github.com/panarch/concerto/blob/master/LICENSE
+Modifications:
+  minor modifications: Tomas Hudziec 2016
+*/
 
 editor.table = {};
 

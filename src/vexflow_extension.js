@@ -1,6 +1,11 @@
-// Vex.Flow.Stave extensions
-// taken from VexUI project by Andre Bakker and modified 
-// https://github.com/andrebakker/VexUI
+/*
+Vex.Flow.Stave extensions
+author:
+  Tomas Hudziec, 2016
+inspiration from:
+  https://github.com/andrebakker/VexUI/blob/master/src/VexFlowExtension.js
+  by Andre Bakker, MIT license
+*/
 
 Vex.Flow.Stave.prototype.getModifierIndex = function(constructor){
   if(this.modifiers)
@@ -29,36 +34,13 @@ Vex.Flow.Stave.prototype.removeKeySignature = function(){
   this.modifiers.splice(this.getModifierIndex(Vex.Flow.KeySignature), 1);
 }
 
-// Vex.Flow.StaveNote extensions
-// inspiration from VexUI
-Vex.Flow.StaveNote.prototype.clone = function(newProps) {
-  var currentProps = {
-    keys: this.keys,
-    stem_direction: this.getStemDirection(),
-    duration: this.duration,
-    noteType: this.noteType
-  };
-  
-  var mergedProps = mergeProperties(currentProps, newProps);
-  mergedProps.duration = mergedProps.duration + mergedProps.noteType;
-  
-  var newNote = new Vex.Flow.StaveNote(mergedProps);
-  
-  //Setting the style as the same style as the note head
-  newNote.setStyle(this.note_heads[0].style);
-   
-  if(this.modifierContext!=null && this.getDots()!=null)
-    newNote.addDotToAll();
-  
-  newNote.beam = this.beam;
-  
-  //Clone modifiers
-  for(var i = 0; i < this.modifiers.length; i++)
-    if(this.modifiers[0] instanceof Vex.Flow.Accidental)
-      newNote.addAccidental(this.modifiers[i].index, new Vex.Flow.Accidental(this.modifiers[i].type));
-
-  return newNote;
-};
+Vex.Flow.Stave.prototype.removeTimeSignature = function(){
+  var timeSignatures = this.getModifiers(Vex.Flow.StaveModifier.Position.BEGIN,
+                                        Vex.Flow.TimeSignature.category);
+  if(timeSignatures.length === 0)
+    return;
+  this.modifiers.splice(this.getModifierIndex(Vex.Flow.TimeSignature), 1);
+}
 
 Vex.Flow.StaveNote.prototype.getModifierIndex = function(constructor){
   if(this.modifiers)
@@ -86,7 +68,6 @@ Vex.Flow.StaveNote.prototype.setAccidental = function(i, accidental){
 // sets one dot to StaveNote if it doesn't have any
 Vex.Flow.StaveNote.prototype.setDot = function(){
   if(!this.isDotted()) {
-    console.log('setDot');
     this.addDotToAll();
   }
 }
@@ -94,7 +75,6 @@ Vex.Flow.StaveNote.prototype.setDot = function(){
 // removes one dot from StaveNote
 Vex.Flow.StaveNote.prototype.removeDot = function(){
   if(this.isDotted()) {
-    console.log('removeDot');
     this.dots = 0;
     this.modifiers.splice(this.getModifierIndex(Vex.Flow.Dot), 1);
   }

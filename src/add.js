@@ -143,41 +143,68 @@ editor.add = {
     var measureIndex = getSelectedMeasureIndex();
     var vfStave = gl_VfStaves[measureIndex];
 
-    vfStave.setKeySignature(keySig);
+    var currentKeysig = getCurAttrForMeasure(measureIndex, 'vfKeySpec');
 
-    gl_StaveAttributes[measureIndex].vfKeySpec = keySig;
-    var fifths = 0;
-    fifths = editor.table.SHARP_MAJOR_KEY_SIGNATURES.indexOf(keySig) + 1;
-    if(!fifths)
-      fifths = -(editor.table.FLAT_MAJOR_KEY_SIGNATURES.indexOf(keySig) + 1);
-    gl_StaveAttributes[measureIndex].xmlFifths = fifths;
+    if(keySig !== currentKeysig) {
+      vfStave.setKeySignature(keySig);
 
-    var xmlAttr = scoreJson["score-partwise"].part[0].measure[measureIndex].attributes || {};
-    xmlAttr.key = {};
-    xmlAttr.key.fifths = fifths;
-    // mode is not mandatory (e.g. major, minor, dorian...)
+      gl_StaveAttributes[measureIndex].vfKeySpec = keySig;
+      var fifths = 0;
+      fifths = editor.table.SHARP_MAJOR_KEY_SIGNATURES.indexOf(keySig) + 1;
+      if(!fifths)
+        fifths = -(editor.table.FLAT_MAJOR_KEY_SIGNATURES.indexOf(keySig) + 1);
+      gl_StaveAttributes[measureIndex].xmlFifths = fifths;
 
-    scoreJson["score-partwise"].part[0].measure[measureIndex].attributes = xmlAttr;
+      var xmlAttr = scoreJson["score-partwise"].part[0].measure[measureIndex].attributes || {};
+      xmlAttr.key = {};
+      xmlAttr.key.fifths = fifths;
+      // mode is not mandatory (e.g. major, minor, dorian...)
 
+      scoreJson["score-partwise"].part[0].measure[measureIndex].attributes = xmlAttr;
+    }
+
+    if(measureIndex > 0) {
+      var previousKeysig = getCurAttrForMeasure(measureIndex - 1, 'vfKeySpec');
+      if(keySig === previousKeysig) {
+        vfStave.removeKeySignature();
+        delete gl_StaveAttributes[measureIndex].vfKeySpec;
+        delete gl_StaveAttributes[measureIndex].xmlFifths;
+        if(scoreJson["score-partwise"].part[0].measure[measureIndex].attributes)
+          delete scoreJson["score-partwise"].part[0].measure[measureIndex].attributes.key;
+      }
+    }
   },
   timeSignature: function(){
     var top = $('#timeSigTop').val();
     var bottom = $('#timeSigBottom').val();
     var timeSig = top + '/' + bottom;
 
-    var measureIndex = getSelectedMeasureIndex();
-    var vfStave = gl_VfStaves[measureIndex];
+    var currentTimesig = getCurAttrForMeasure(measureIndex, 'vfTimeSpec');
 
-    vfStave.setTimeSignature(timeSig);
-    gl_StaveAttributes[measureIndex].vfTimeSpec = timeSig;
+    if(timeSig !== currentTimesig) {
+      var measureIndex = getSelectedMeasureIndex();
+      var vfStave = gl_VfStaves[measureIndex];
 
-    var xmlAttr = scoreJson["score-partwise"].part[0].measure[measureIndex].attributes || {};
-    xmlAttr.time = {};
-    xmlAttr.time.beats = top;
-    xmlAttr.time['beat-type'] = bottom;
+      vfStave.setTimeSignature(timeSig);
+      gl_StaveAttributes[measureIndex].vfTimeSpec = timeSig;
 
-    scoreJson["score-partwise"].part[0].measure[measureIndex].attributes = xmlAttr;
+      var xmlAttr = scoreJson["score-partwise"].part[0].measure[measureIndex].attributes || {};
+      xmlAttr.time = {};
+      xmlAttr.time.beats = top;
+      xmlAttr.time['beat-type'] = bottom;
 
+      scoreJson["score-partwise"].part[0].measure[measureIndex].attributes = xmlAttr;
+    }
+
+    if(measureIndex > 0) {
+      var previousTimesig = getCurAttrForMeasure(measureIndex - 1, 'vfTimeSpec');
+      if(timeSig === previousTimesig) {
+        vfStave.removeTimeSignature();
+        delete gl_StaveAttributes[measureIndex].vfTimeSpec;
+        if(scoreJson["score-partwise"].part[0].measure[measureIndex].attributes)
+          delete scoreJson["score-partwise"].part[0].measure[measureIndex].attributes.time;
+      }
+    }
   },
   accidental: function(){
     var vexAcc = getRadioValue('note-accidental');

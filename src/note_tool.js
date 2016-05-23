@@ -1,11 +1,13 @@
-// Concerto Base Libraries.
-// author: Taehoon Moon <panarch@kaist.ac.kr>
-//
-// NoteTool
-//
-// Copyright Taehoon Moon 2014
-
-// minor modifications: Tomas Hudziec 2016
+/*
+Project: Concerto
+  https://github.com/panarch/concerto
+Code authors:
+  Taehoon Moon <panarch@kaist.ac.kr>, 2014
+Licensed under MIT license
+  https://github.com/panarch/concerto/blob/master/LICENSE
+Modifications:
+  function transposeNote created by Thomas Hudziec, 2016
+*/
 
 editor.NoteTool = {};
 
@@ -107,6 +109,7 @@ editor.NoteTool = {};
     // interval: 2
     // return: 'e/4'
     // TODO perform automated testing to proof complete correctness
+    // author Thomas Hudziec, 2016
     editor.NoteTool.transposeNote = function transposeNote(key, interval) {
         var step = key[0];
         var octave = +key[key.length - 1];
