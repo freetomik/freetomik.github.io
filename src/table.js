@@ -62,6 +62,17 @@ editor.table.NOTE_VEX_TYPE_DICT = {
 
 };
 
+editor.table.DURATION_DICT = {
+  'w' : '1',
+  'h' : '2',
+  'q' : '4',
+  '8' : '8',
+  '16' : '16',
+  '32' : '32',
+  '64' : '64',
+  '128' : '128'
+};
+
 editor.table.CLEF_TYPE_DICT = {
     'G/2': 'treble',
     'F/4': 'bass',
@@ -92,4 +103,18 @@ editor.table.CLEF_VEX_TYPE_DICT = {
 
 editor.table.STAVE_DEFAULT_OPTIONS = {
     'space_above_staff_ln': 0
+};
+
+editor.MidiClefOffsets = {
+  "treble": 0,
+  "bass" : -21,
+  "alto": -10,
+    "tenor": -14,
+    "percussion": 0,
+    "soprano": -4,
+    "mezzo-soprano": -7,
+    "baritone-c": -17,
+    "baritone-f": -17,
+    "subbass": -24,
+    "french": 6 
 };

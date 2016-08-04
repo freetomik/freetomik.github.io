@@ -110,5 +110,8 @@ function initUI() {
   $("#keySig-dropdown").val("C");
   // set selected time signature to 4/4
   $("#timeSigTop").val("4");
-  $("#timeSigBottom").val("4");  
+  $("#timeSigBottom").val("4");
+
+  $("#button-play").prop("disabled", false);
+  $("#button-stop").prop("disabled", true);
 }
