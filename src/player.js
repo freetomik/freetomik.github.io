@@ -100,11 +100,13 @@ Player.prototype.fireEvent = function(event){
 	switch(event.subtype){
 		case 'noteOn':
 			MIDI.noteOn(event.channel, event.noteNumber, event.velocity, 0);
+      $('svg #vf-'+event.note.id).colourNote("red");
 			// event.note.setHighlight(true);
 			// self.handler.redraw();
 			break;
 		case 'noteOff':
 			MIDI.noteOff(event.channel, event.noteNumber, 0);
+      $('svg #vf-'+event.note.id).colourNote("black");
 			// event.note.setHighlight(false);
 			// self.handler.redraw();
 			break;
@@ -155,7 +157,7 @@ editor.play = function(){
 			};
 	//var script = "MIDI.setVolume(0, 127);";
 	var playEvents = [];
-	for(var i = 0; i < gl_VfStaves.length; i++){
+	for(var i = getSelectedMeasureIndex(); i < gl_VfStaves.length; i++){
 		var stave = gl_VfStaves[i];
 		//set clef to playinfo
 		playInfo.clef = stave.clef;
@@ -165,7 +167,7 @@ editor.play = function(){
 		// barNote.setType(stave.modifiers[0].barline);
 		// playEvents = playEvents.concat(barNote.getPlayEvents(playInfo, playEvents));
 
-		for(var j = 0; j < gl_VfStaveNotes[i].length; j++){
+		for(var j = getSelectedNoteIndex(); j < gl_VfStaveNotes[i].length; j++){
 			var staveNote = gl_VfStaveNotes[i][j];
 			playEvents = playEvents.concat(staveNote.getPlayEvents(playInfo));//, playEvents));
 		}		
