@@ -11,8 +11,12 @@ body {
   border:1px solid lightgray;
 }
 .tool-section {
-  margin-right:10px;
-  display:inline;
+  margin-right: 10px;
+  display: inline-block;
+}
+#file > .tool-section {
+  margin-right: 10px;
+  display: inline-table;
 }
 .tool-section button {
   padding: 1px 10px 1px;
