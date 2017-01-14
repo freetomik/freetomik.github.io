@@ -162,6 +162,7 @@ editor.parse = {
       oct = note.pitch.octave;
       // since this project is yet not interested in how note sounds,
       // alter element is not needed; accidental is read from accidental element
+      // TODO: parse also alter element and save it, we are playing also now
     }
 
     if(note.accidental) {

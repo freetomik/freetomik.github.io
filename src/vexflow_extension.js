@@ -82,8 +82,6 @@ Vex.Flow.StaveNote.prototype.removeDot = function(){
 
 
 // for MIDI playback
-// TODO next step:
-// see Vex.UI.Handler.prototype.play() in Handler.js on line 329
 
 Vex.Flow.StaveNote.prototype.getPlayEvents = function(playInfo){
   //Prepare the notes to be sent

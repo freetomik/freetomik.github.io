@@ -163,8 +163,14 @@ editor.play = function(){
 
   for(var i = selMeasureIn; i < gl_VfStaves.length; i++){
     var stave = gl_VfStaves[i];
-    //set clef to playinfo
-    playInfo.clef = stave.clef;
+
+    // set clef to playinfo
+    // playInfo.clef = stave.clef;
+
+    // get clef rather from my saved attributes, not from Vex.Flow.Stave object,
+    // because VexFlow has it tied with graphical element of clef,
+    // but I want clef information only for playing
+    playInfo.clef = getCurAttrForMeasure(i, 'vfClef');
 
     //Call initial barline play events
     // var barNote = new Vex.Flow.BarNote();
